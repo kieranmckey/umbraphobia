@@ -9,6 +9,10 @@ const ATTACK_RANGE = 14.0
 
 @export var player_path := "/root/World/Map/NavigationRegion3D/Player"
 
+# Bullets
+var bullet = load("res://Scenes/Bullet.tscn")
+var instance
+
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
 @onready var raycast = $RayCast3D
@@ -31,12 +35,13 @@ func _process(delta):
 			velocity = (next_nav_point - global_transform.origin).normalized() * SPEED
 			rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * 10.0)
 		"Shoot":
-			look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
-			raycast.force_raycast_update()
-			if raycast.is_colliding():
-				var collider = raycast.get_collider()
-				if collider.has_method("hit"):  # Raycast collides with player	
-					_hit_finished()		
+			look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)			
+			#raycast.force_raycast_update()
+			#if raycast.is_colliding():
+			#	var collider = raycast.get_collider()
+				#if collider.has_method("hit"):  # Raycast collides with player	
+			#	if collider.is_in_group("player"):
+			#		_hit_finished()		
 					#Audio.play("sounds/enemy_attack.ogg")
 					#collider.hit((raycast.global_basis * raycast.target_position).normalized())
 
@@ -61,12 +66,15 @@ func _hit_finished():
 		var dir = global_position.direction_to(player.global_position)
 		player.hit(dir)
 
-
+func _fire():
+	instance = bullet.instantiate()
+	instance.position = raycast.global_position # todo add correct gun pos
+	instance.transform.basis = raycast.global_transform.basis
+	get_parent().add_child(instance)
 
 func _on_area_3d_body_part_hit(dam):
 	health -= dam
 	if health <= 0:
-		#anim_tree.set("parameters/conditions/dienow", true)
 		var state_machine = anim_tree["parameters/playback"]
 		state_machine.travel("Die")
 		

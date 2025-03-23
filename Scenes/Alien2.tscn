@@ -2524,7 +2524,7 @@ tracks/103/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"_hit_finished"
+"method": &"_fire"
 }]
 }
 
@@ -3781,10 +3781,10 @@ target_desired_distance = 5.0
 path_height_offset = 0.3
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.992546, -0.121869, 0, 0.121869, -0.992546, -0.453401, 1.33464, -0.674394)
-exclude_parent = false
-target_position = Vector3(0, -1, 10)
-debug_shape_thickness = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0831516, 1.33464, -0.674394)
+target_position = Vector3(0, 0, -1)
+debug_shape_thickness = 4
+metadata/_edit_lock_ = true
 
 [connection signal="body_part_hit" from="Armature/Skeleton3D/BoneAttachment3D/Area3D2" to="." method="_on_area_3d_body_part_hit"]
 [connection signal="body_part_hit" from="Armature/Skeleton3D/Physical Bone mixamorig_Head/Area3D" to="." method="_on_area_3d_body_part_hit"]

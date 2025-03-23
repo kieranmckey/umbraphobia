@@ -5,7 +5,7 @@ const WALK_SPEED = 8.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 3.0 #4.5
 const SENSITIVITY = 0.004
-const HIT_STAGGER = 8.0
+const HIT_STAGGER = 28.0
 
 #bob variables
 const BOB_FREQ = 2.4

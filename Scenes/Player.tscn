@@ -1,23 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://5iurrb07epis"]
+[gd_scene load_steps=6 format=3 uid="uid://5iurrb07epis"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ueh2c"]
+[ext_resource type="Script" path="res://Scripts/BodyPart.gd" id="2_1e570"]
 [ext_resource type="PackedScene" uid="uid://bqpwh2qhltcpn" path="res://Scenes/Rifle.tscn" id="2_kpw2n"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xc2g5"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sbgyl"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xc2g5"]
 
 [node name="Player" type="CharacterBody3D"]
 motion_mode = 1
 floor_max_angle = 1.0472
 script = ExtResource("1_ueh2c")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_sbgyl")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 3
 cast_shadow = 0
 mesh = SubResource("CapsuleMesh_xc2g5")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." groups=["player"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_1e570")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_sbgyl")
 
@@ -33,3 +44,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.270765, -0.266362, -0.54277
 
 [node name="Rifle2" parent="Head/Camera3D" instance=ExtResource("2_kpw2n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.271, -0.266, -0.543)
+
+[connection signal="player_hit" from="Area3D" to="." method="hit"]
