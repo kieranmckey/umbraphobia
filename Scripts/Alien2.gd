@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-
 var player = null
 var state_machine
 var health = 2
@@ -12,7 +11,7 @@ const ATTACK_RANGE = 14.0
 
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
-
+@onready var raycast = $RayCast3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,6 +32,14 @@ func _process(delta):
 			rotation.y = lerp_angle(rotation.y, atan2(-velocity.x, -velocity.z), delta * 10.0)
 		"Shoot":
 			look_at(Vector3(player.global_position.x, global_position.y, player.global_position.z), Vector3.UP)
+			raycast.force_raycast_update()
+			if raycast.is_colliding():
+				var collider = raycast.get_collider()
+				if collider.has_method("hit"):  # Raycast collides with player	
+					_hit_finished()		
+					#Audio.play("sounds/enemy_attack.ogg")
+					#collider.hit((raycast.global_basis * raycast.target_position).normalized())
+
 		"Die":
 			anim_tree.set("parameters/conditions/dienow", true)
 			await get_tree().create_timer(4.0).timeout
