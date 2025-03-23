@@ -28,7 +28,6 @@ radius = 1.00433
 height = 3.35048
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_c7k8v"]
-radius = 0.35
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhf02"]
 resource_name = "Ch44_Body"
@@ -3760,13 +3759,13 @@ bone_name = "mixamorig_Spine"
 bone_idx = 1
 
 [node name="Area3D2" type="Area3D" parent="Armature/Skeleton3D/BoneAttachment3D" groups=["enemy"]]
-transform = Transform3D(-49.9235, 1.49043, 2.32976, -1.72698, 16.0991, -47.3058, -2.16026, -47.3138, -16.023, -0.0135595, 0.0218365, 0.0674772)
+transform = Transform3D(-0.998469, 0.0298086, 0.0465953, -0.0345395, 0.321982, -0.946116, -0.0432052, -0.946276, -0.320459, -0.0135595, 0.0218365, 0.0674772)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("10_d1e2f")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Armature/Skeleton3D/BoneAttachment3D/Area3D2"]
-transform = Transform3D(0.742081, -0.126858, 0.658197, -0.480528, 0.583926, 0.654313, -0.467342, -0.801836, 0.372361, -0.279364, -0.210462, -0.225593)
+transform = Transform3D(79.2558, -9.20529, 60.2809, -57.3367, 22.4063, 78.8065, -20.7611, -97.0218, 12.4803, -0.111433, -0.534171, 0.176504)
 shape = SubResource("CapsuleShape3D_8v8ya")
 
 [node name="Physical Bone mixamorig_Head" type="BoneAttachment3D" parent="Armature/Skeleton3D"]
@@ -3775,13 +3774,13 @@ bone_name = "mixamorig_Head"
 bone_idx = 5
 
 [node name="Area3D" type="Area3D" parent="Armature/Skeleton3D/Physical Bone mixamorig_Head" groups=["enemy"]]
-transform = Transform3D(-49.9235, 1.49043, 2.32976, -1.72698, 16.0991, -47.3058, -2.16026, -47.3138, -16.023, -0.0135595, 0.0218365, 0.0674772)
+transform = Transform3D(-0.998469, 0.0298086, 0.0465953, -0.0345396, 0.321982, -0.946115, -0.0432052, -0.946276, -0.32046, 0, 0, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("10_d1e2f")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Armature/Skeleton3D/Physical Bone mixamorig_Head/Area3D"]
-transform = Transform3D(0.979606, -0.186911, -0.0737307, 0.186476, 0.982377, -0.0127885, 0.0748216, -0.00122127, 0.997196, -0.0157173, -0.00549322, -0.234026)
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, -0.0129603, 0.00438988, -0.231432)
 shape = SubResource("SphereShape3D_c7k8v")
 
 [node name="Ch44" type="MeshInstance3D" parent="Armature/Skeleton3D"]
