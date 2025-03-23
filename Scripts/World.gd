@@ -1,10 +1,10 @@
 extends Node3D
 
-@onready var hit_rect = $UI/HitRect
+@onready var hit_rect = $CanvasLayer/HitRect
 @onready var spawns = $Map/Spawns
 @onready var navigation_region = $Map/NavigationRegion3D
 
-var zombie = load("res://Scenes/Alien2.tscn")
+var alien = load("res://Scenes/Alien2.tscn")
 var instance
 
 
@@ -30,6 +30,6 @@ func _get_random_child(parent_node):
 
 func _on_zombie_spawn_timer_timeout():
 	var spawn_point = _get_random_child(spawns).global_position
-	instance = zombie.instantiate()
+	instance = alien.instantiate()
 	instance.position = spawn_point
 	navigation_region.add_child(instance)

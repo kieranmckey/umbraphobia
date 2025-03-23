@@ -30,7 +30,8 @@ func _process(delta):
 		if ray.get_collider().is_in_group("player"):
 			var dir = global_position.direction_to(player.global_position)
 			ray.get_collider().hit_player(dir)	
-		await get_tree().create_timer(1.0).timeout
+		if get_tree():	
+			await get_tree().create_timer(1.0).timeout
 		queue_free()
 
 

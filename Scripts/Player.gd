@@ -18,6 +18,8 @@ const FOV_CHANGE = 1.5
 
 # signal
 signal player_hit
+signal health_updated
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 9.8
@@ -33,6 +35,7 @@ var instance
 @onready var gun_anim2 = $Head/Camera3D/Rifle2/AnimationPlayer
 @onready var gun_barrel2 = $Head/Camera3D/Rifle2/RayCast3D
 
+var health:int = 100
 
 
 func _ready():
@@ -114,3 +117,11 @@ func _headbob(time) -> Vector3:
 func hit(dir):
 	emit_signal("player_hit")
 	velocity += dir * HIT_STAGGER
+	damage(1) #TODO
+
+func damage(amount):	
+	health -= amount
+	health_updated.emit(health) # Update health on HUD
+	
+	if health < 0:
+		get_tree().reload_current_scene() # Reset when out of health
