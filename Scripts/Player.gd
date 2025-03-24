@@ -3,7 +3,7 @@ extends CharacterBody3D
 var speed
 const WALK_SPEED = 8.0
 const SPRINT_SPEED = 8.0
-const JUMP_VELOCITY = 3.0 #4.5
+const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.004
 const HIT_STAGGER = 28.0
 
@@ -30,10 +30,10 @@ var instance
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var gun_anim = $Head/Camera3D/Rifle/AnimationPlayer
-@onready var gun_barrel = $Head/Camera3D/Rifle/RayCast3D
-@onready var gun_anim2 = $Head/Camera3D/Rifle2/AnimationPlayer
-@onready var gun_barrel2 = $Head/Camera3D/Rifle2/RayCast3D
+@onready var gun_anim = $Head/Camera3D/LaserGun/AnimationPlayer #$Head/Camera3D/Rifle/AnimationPlayer
+@onready var gun_barrel = $Head/Camera3D/LaserGun/RayCast3D
+@onready var gun_anim2 = $Head/Camera3D/LaserGun2/AnimationPlayer
+@onready var gun_barrel2 = $Head/Camera3D/LaserGun2/RayCast3D
 
 var health:int = 100
 
