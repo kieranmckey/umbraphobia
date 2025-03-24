@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://Models/BrickWall/brick_wall_end.tscn" id="5_kqesi"]
 [ext_resource type="PackedScene" uid="uid://kdfasdqo4jxo" path="res://Models/Rock/Rock.tscn" id="13_ers4l"]
 [ext_resource type="PackedScene" uid="uid://dpanxx1pskk4p" path="res://Models/Lights/Lightpost.tscn" id="17_vjrdm"]
+[ext_resource type="Shader" path="res://Shaders/Opal.gdshader" id="18_mu3mu"]
 [ext_resource type="PackedScene" uid="uid://bjt637xgdta41" path="res://Models/Trees/pine_crooked_decoration.tscn" id="19_of6p0"]
 [ext_resource type="PackedScene" uid="uid://tccjai38v8g1" path="res://Models/Decorations/bench_dec.tscn" id="20_w3vkt"]
 [ext_resource type="PackedScene" uid="uid://bluy4ycljr8h5" path="res://Models/Decorations/pumpkin_carved_dec.tscn" id="21_trcuf"]
@@ -18,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://d3xejhwjbwb5h" path="res://Models/CorridorWall/wall.tscn" id="29_ncx4a"]
 [ext_resource type="PackedScene" uid="uid://5iurrb07epis" path="res://Scenes/Player.tscn" id="31_jumwc"]
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="33_kv4gf"]
-[ext_resource type="Shader" path="res://Scenes/World.gdshader" id="33_vnbgr"]
 [ext_resource type="FontFile" uid="uid://biqtga8moh7ah" path="res://Fonts/lilita_one_regular.ttf" id="34_rfvjl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t7442"]
@@ -61,19 +61,13 @@ size = Vector2(20, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q70a3"]
 render_priority = 0
-shader = ExtResource("33_vnbgr")
-shader_parameter/tile_color = Color(0, 0.0866986, 0.0867604, 1)
-shader_parameter/grout_color = Color(0.841046, 0.693068, 0.157391, 1)
-shader_parameter/accent_color = Color(0.543825, 0.145946, 0.617921, 1)
+shader = ExtResource("18_mu3mu")
+shader_parameter/base = Color(0.2, 0.5, 0.9, 1)
+shader_parameter/highlight1 = Color(0.9, 0.5, 0.2, 1)
+shader_parameter/highlight2 = Color(0.6, 1, 0.3, 1)
+shader_parameter/noise_scale = 10.0
 shader_parameter/roughness = 0.278
-shader_parameter/use_normal_map = true
-shader_parameter/normal_intensity = 0.06
-shader_parameter/rotate_45 = false
-shader_parameter/tile_scale = 3.0
-shader_parameter/diamond_size = 0.734
-shader_parameter/grout_thickness = 0.036
-shader_parameter/diamond_accent_size = 0.508
-shader_parameter/grout_accent_size = 0.018
+shader_parameter/shift_intensity = 1.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_8rh05"]
 font = ExtResource("34_rfvjl")

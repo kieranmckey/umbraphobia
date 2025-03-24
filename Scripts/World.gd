@@ -4,7 +4,7 @@ extends Node3D
 @onready var spawns = $Map/Spawns
 @onready var navigation_region = $Map/NavigationRegion3D
 
-var alien = load("res://Scenes/Alien2.tscn")
+var alien = load("res://Scenes/Alien.tscn")
 var instance
 
 
