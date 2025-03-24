@@ -30,10 +30,10 @@ var instance
 
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
-@onready var gun_anim = $Head/Camera3D/Rifle/AnimationPlayer
-@onready var gun_barrel = $Head/Camera3D/Rifle/RayCast3D
-@onready var gun_anim2 = $Head/Camera3D/Rifle2/AnimationPlayer
-@onready var gun_barrel2 = $Head/Camera3D/Rifle2/RayCast3D
+@onready var gun_anim = $Head/Camera3D/LaserGun/AnimationPlayer #$Head/Camera3D/Rifle/AnimationPlayer
+@onready var gun_barrel = $Head/Camera3D/LaserGun/RayCast3D
+@onready var gun_anim2 = $Head/Camera3D/LaserGun2/AnimationPlayer
+@onready var gun_barrel2 = $Head/Camera3D/LaserGun2/RayCast3D
 
 var health:int = 100
 

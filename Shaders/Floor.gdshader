@@ -2,8 +2,8 @@
 Shader from Godot Shaders - the free shader library.
 https://godotshaders.com/shader/quick-procedural-floor-tiles/
 
-This shader is under CC0 license. Feel free to use, improve and 
-change this shader according to your needs and consider sharing 
+This shader is under CC0 license. Feel free to use, improve and
+change this shader according to your needs and consider sharing
 the modified result to godotshaders.com.
 */
 
@@ -51,55 +51,55 @@ void fragment() {
 		world_uv = rotate(vec2(world_pos.x, world_pos.z), deg2rad(45.0));
 	}
 	world_uv = fract(world_uv * tile_scale);
-	
+
 	//Draw circles
 	float c = distance(vec2(0.5), world_uv);
 	c = 1.0 - step(diamond_size, c);
-	
+
 	//Draw vertical lines
 	float vl1 = step(grout_thickness, world_uv.x);
 	float vl2 = 1.0 - step(1.0 - grout_thickness, world_uv.x);
-	
+
 	//Draw horizontal lines
 	float hl1 = step(grout_thickness, world_uv.y);
 	float hl2 = 1.0 - step(1.0 - grout_thickness, world_uv.y);
-	
+
 	//Combine lines
 	float lines = vl1 * vl2 * hl1 * hl2;
-	
+
 	//Create pattern mask
 	float pattern_mask = clamp(lines * c, 0.0, 1.0);
-	
+
 	//Draw accent circles
 	float ac = distance(vec2(0.5), world_uv);
 	ac = 1.0 - step(diamond_accent_size, ac);
-	
+
 	//Draw accent vertical lines
 	float avl1 = step(grout_accent_size, world_uv.x);
 	float avl2 = 1.0 - step(1.0 - grout_accent_size, world_uv.x);
-	
+
 	//Draw accent horizontal lines
 	float ahl1 = step(grout_accent_size, world_uv.y);
 	float ahl2 = 1.0 - step(1.0 - grout_accent_size, world_uv.y);
-	
+
 	//Combine accent lines
 	float cal = avl1 * avl2 * ahl1 * ahl2;
-	
+
 	//Combine accent lines and accent diamonds
 	float accent_mask = clamp(cal * ac, 0.0, 1.0);
-	
+
 	//Make separate tile mask
 	float tile_mask = clamp(accent_mask * pattern_mask, 0.0, 1.0);
-	
+
 	//Mix colors
 	vec3 color = mix(accent_color, vec3(1.0), accent_mask);
 	color = mix(grout_color, color, pattern_mask);
 	color = mix(color, tile_color, tile_mask);
-	
+
 	//Set outputs
 	ALBEDO = color;
 	ROUGHNESS = roughness;
-	
+
 	if (use_normal_map) {
 		// If you want to use a normal map, tick the use normal map box in the inspector
 		// You can either use an external normal map, or use the built in noise tool
@@ -109,5 +109,5 @@ void fragment() {
 		NORMAL_MAP = texture(normal_map, world_uv).rgb;
 		NORMAL_MAP_DEPTH = normal_intensity;
 	}
-	
+
 }

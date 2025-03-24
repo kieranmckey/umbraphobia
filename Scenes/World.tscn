@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=24 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="Texture2D" uid="uid://difglsmbfmw81" path="res://Textures/terrain.jpg" id="1_v880l"]
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_yrgup"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://5xy421ddd0mk" path="res://Models/Craft/craft_miner_2.tscn" id="5_hwbq5"]
 [ext_resource type="Shader" path="res://Shaders/Floor.gdshader" id="7_4msxw"]
 [ext_resource type="PackedScene" uid="uid://cpjh4yc0mpg4u" path="res://Models/Barrels/barrel.tscn" id="7_5jic0"]
+[ext_resource type="PackedScene" uid="uid://mb3smwxkwhah" path="res://Models/Corridors/corridor_detailed_2.tscn" id="8_6bnwl"]
+[ext_resource type="PackedScene" uid="uid://2nusbkuyv34f" path="res://Models/Corridors/corridor_corner_round_window_2.tscn" id="9_gtnb1"]
 [ext_resource type="PackedScene" uid="uid://kdfasdqo4jxo" path="res://Models/Rock/Rock.tscn" id="13_ers4l"]
 [ext_resource type="PackedScene" uid="uid://c3x63pmql6c68" path="res://Models/Chimney/Chimney1.tscn" id="16_o5klw"]
 [ext_resource type="PackedScene" uid="uid://d3xejhwjbwb5h" path="res://Models/CorridorWall/wall.tscn" id="29_ncx4a"]
@@ -108,6 +110,9 @@ size = Vector3(110.997, 0.002, 97.6227)
 [node name="rock2" parent="Map/NavigationRegion3D/LargeDecorations" instance=ExtResource("13_ers4l")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 12, 0, 0)
 
+[node name="rock3" parent="Map/NavigationRegion3D/LargeDecorations" instance=ExtResource("13_ers4l")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 12, 0, 12.6387)
+
 [node name="CraftB" parent="Map/NavigationRegion3D/LargeDecorations" instance=ExtResource("4_7gu3i")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.60706, 0, 0)
 
@@ -207,13 +212,62 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -29, 0, -32.878)
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -29, 0, -29.105)
 
 [node name="barrel2" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -7.8272, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -7.8272, 0, 0)
 
 [node name="barrel3" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -7.8272, 0, 0.919522)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -7.8272, 0, 0.919522)
 
 [node name="barrel4" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
-transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -7.8272, 0, 3.62367)
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -7.8272, 0, 3.62367)
+
+[node name="barrel5" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -20.3097, 0, 12.7255)
+
+[node name="barrel6" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -20.3097, 0, 14.5777)
+
+[node name="barrel7" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -21.5271, 0, 16.2389)
+
+[node name="barrel8" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -21.5271, 0, 37.7963)
+
+[node name="barrel9" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -19.2564, 0, 37.7963)
+
+[node name="barrel10" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -15.8332, 0, 37.7963)
+
+[node name="barrel11" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -11.8512, 0, 37.7963)
+
+[node name="barrel12" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -13.3076, 0, 40.1732)
+
+[node name="barrel13" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -10.3043, 0, 40.1732)
+
+[node name="barrel14" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -7.02288, 0, 40.1732)
+
+[node name="barrel15" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -3.32097, 0, 40.1732)
+
+[node name="barrel16" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("7_5jic0")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -3.32097, 0, 40.1732)
+
+[node name="Corridor" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("8_6bnwl")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.40618, 0, 25.6408)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Corridor2" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("8_6bnwl")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.40618, 0, 28.6149)
+collision_layer = 3
+collision_mask = 3
+
+[node name="corridor_corner" parent="Map/NavigationRegion3D/Decorations" instance=ExtResource("9_gtnb1")]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, -2.83015, 0, 22.8354)
 
 [node name="Player" parent="Map/NavigationRegion3D" instance=ExtResource("31_jumwc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0912757, 7)

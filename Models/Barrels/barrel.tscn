@@ -69,6 +69,8 @@ height = 0.262074
 radius = 0.117683
 
 [node name="barrel2" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="barrel" type="MeshInstance3D" parent="."]
 layers = 3

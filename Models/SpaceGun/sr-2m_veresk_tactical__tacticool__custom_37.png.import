@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cbauy1sqhpd43"
+path.s3tc="res://.godot/imported/sr-2m_veresk_tactical__tacticool__custom_37.png-359782680b44747ce99db908a50edcc1.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "6c6503ff67f230353125915247900883"
+}
+
+[deps]
+
+source_file="res://Models/SpaceGun/sr-2m_veresk_tactical__tacticool__custom_37.png"
+dest_files=["res://.godot/imported/sr-2m_veresk_tactical__tacticool__custom_37.png-359782680b44747ce99db908a50edcc1.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://Models/SpaceGun/sr-2m_veresk_tactical__tacticool__custom_37.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
