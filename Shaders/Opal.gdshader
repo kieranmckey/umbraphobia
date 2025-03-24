@@ -30,7 +30,7 @@ void fragment() {
 	vec3 V = normalize(-VIEW);
 	//Quick convenient fresnel simulation
 	float _fresnel = pow(1.0 - dot(NORMAL, V), 3.0);
-	
+
 	vec3 world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	float noise_value = noise(UV * noise_scale);
 
@@ -40,10 +40,10 @@ void fragment() {
 	ALBEDO = mix(ALBEDO, highlight2, turbulence);
 
 	float angle_factor = abs(dot(V, NORMAL));
-	
+
 	//Assumed to be mixing from black here
 	ALBEDO = mix(ALBEDO, vec3(0.0), angle_factor * shift_intensity);
-	
+
 	//fade out according to roughness
 	ALBEDO = mix(ALBEDO, vec3(0.0), _fresnel * roughness);
 
