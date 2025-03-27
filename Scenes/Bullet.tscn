@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://yn400ram7bxt"]
 
-[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_lc6tw"]
+[ext_resource type="Script" uid="uid://cul346536vq18" path="res://Scripts/Bullet.gd" id="1_lc6tw"]
 [ext_resource type="PackedScene" uid="uid://c216ufbtsn7w2" path="res://Models/Particles/vfx_one.tscn" id="2_wwv32"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m767h"]

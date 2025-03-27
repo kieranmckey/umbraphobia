@@ -34,7 +34,6 @@ var instance
 @onready var gun_barrel = $Head/Camera3D/LaserGun/RayCast3D
 @onready var gun_anim2 = $Head/Camera3D/LaserGun2/AnimationPlayer
 @onready var gun_barrel2 = $Head/Camera3D/LaserGun2/RayCast3D
-@onready var raycast = $Head/Camera3D/RayCast3D
 
 var health:int = 100
 
@@ -66,7 +65,7 @@ func _physics_process(delta):
 	#	speed = WALK_SPEED
 
 	# Get the input direction and handle the movement/deceleration.
-	var input_dir = Input.get_vector("left", "right", "up", "down")
+	var input_dir = Input.get_vector("moveLeft", "moveRight", "moveForward", "moveBackward")
 	var direction = (head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	#if is_on_floor():
 	#	if direction:

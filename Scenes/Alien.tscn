@@ -1,9 +1,9 @@
 [gd_scene load_steps=36 format=4 uid="uid://bbc4ql2qtpcp8"]
 
 [ext_resource type="Texture2D" uid="uid://dhn4846gf687t" path="res://Models/Alien/Alien2_Ch44_1002_Diffuse.png" id="1_0re1o"]
-[ext_resource type="Script" path="res://Scripts/Alien.gd" id="1_ifahp"]
+[ext_resource type="Script" uid="uid://dc1pk0ls67xy4" path="res://Scripts/Alien.gd" id="1_ifahp"]
 [ext_resource type="Texture2D" uid="uid://d4mut88pc6ub7" path="res://Models/Alien/Alien2_Ch44_1002_Emissive.png" id="2_ow3ds"]
-[ext_resource type="Shader" path="res://Shaders/Weapon.gdshader" id="2_uiv5d"]
+[ext_resource type="Shader" uid="uid://db8r4sk6ophnh" path="res://Shaders/Weapon.gdshader" id="2_uiv5d"]
 [ext_resource type="Texture2D" uid="uid://cyilikkorxhkg" path="res://Models/Alien/Alien2_Ch44_1002_Glossiness.png" id="3_wcirw"]
 [ext_resource type="Texture2D" uid="uid://dsu1wr0aentev" path="res://Models/Alien/Alien2_Ch44_1002_Normal.png" id="4_ujxg7"]
 [ext_resource type="Texture2D" uid="uid://b2txdkf6sio2l" path="res://Models/Alien/Alien2_Ch44_1001_Diffuse.png" id="5_xng4b"]
@@ -3272,10 +3272,10 @@ tracks/102/keys = PackedFloat32Array(0, 1, 9.3542e-06, 6.71318, 6.87319e-07)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_17qw3"]
 _data = {
-"Arise": SubResource("Animation_pesr5"),
-"Die": SubResource("Animation_3ylxy"),
-"Shoot": SubResource("Animation_unrwc"),
-"Walk": SubResource("Animation_8fned")
+&"Arise": SubResource("Animation_pesr5"),
+&"Die": SubResource("Animation_3ylxy"),
+&"Shoot": SubResource("Animation_unrwc"),
+&"Walk": SubResource("Animation_8fned")
 }
 
 [node name="Alien" type="CharacterBody3D"]

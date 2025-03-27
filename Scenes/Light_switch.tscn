@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=4 uid="uid://crib1k4teeu8m"]
 
-[ext_resource type="Script" path="res://Scripts/LightSwitch.gd" id="1_y4qix"]
+[ext_resource type="Script" uid="uid://b0s8yfy4d0j0f" path="res://Scripts/LightSwitch.gd" id="1_y4qix"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lbhgp"]
 resource_name = "metal"

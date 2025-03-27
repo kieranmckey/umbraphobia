@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://5iurrb07epis"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ueh2c"]
+[ext_resource type="Script" uid="uid://b0e47m8pfxj13" path="res://Scripts/Player.gd" id="1_ueh2c"]
 [ext_resource type="PackedScene" uid="uid://bqpwh2qhltcpn" path="res://Scenes/Rifle.tscn" id="2_kpw2n"]
 [ext_resource type="PackedScene" uid="uid://dmpgna52b44we" path="res://Scenes/Laser_gun.tscn" id="4_se6ew"]
 [ext_resource type="PackedScene" uid="uid://btu85nybswgdo" path="res://Scenes/pistol.tscn" id="5_y0wsq"]
@@ -12,7 +12,6 @@
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 3
 collision_mask = 3
-motion_mode = 1
 floor_max_angle = 1.0472
 script = ExtResource("1_ueh2c")
 
