@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://yn400ram7bxt"]
+[gd_scene load_steps=8 format=3 uid="uid://yn400ram7bxt"]
 
 [ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_lc6tw"]
+[ext_resource type="PackedScene" uid="uid://c216ufbtsn7w2" path="res://Models/Particles/vfx_one.tscn" id="2_wwv32"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m767h"]
 size = Vector3(0.05, 0.05, 1)
@@ -52,5 +53,8 @@ draw_pass_1 = SubResource("BoxMesh_8wylk")
 wait_time = 5.0
 one_shot = true
 autostart = true
+
+[node name="VfxOne" parent="." instance=ExtResource("2_wwv32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238855, 0.271014, 0)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
