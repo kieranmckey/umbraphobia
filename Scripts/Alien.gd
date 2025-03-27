@@ -7,7 +7,7 @@ var health = 2
 const SPEED = 4.0
 const ATTACK_RANGE = 14.0
 
-@export var player_path := "/root/World/Map/NavigationRegion3D/Player"
+@export var player_path := "/root/World/Map/NavigationRegion3D/PlayerCharacter/Player"
 
 # Bullets
 var bullet = load("res://Scenes/Bullet.tscn")

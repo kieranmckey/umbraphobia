@@ -12,7 +12,7 @@ const SPEED = 40.0
 
 var player = null
 
-@export var player_path := "/root/World/Map/NavigationRegion3D/Player"
+@export var player_path := "/root/World/Map/NavigationRegion3D/PlayerCharacter/Player"
 
 
 
