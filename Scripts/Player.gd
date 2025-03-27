@@ -1,11 +1,11 @@
 extends CharacterBody3D
 
 var speed
-const WALK_SPEED = 8.0
-const SPRINT_SPEED = 8.0
+const WALK_SPEED = 4.0
+const SPRINT_SPEED = 4.0
 const JUMP_VELOCITY = 4.5
 const SENSITIVITY = 0.004
-const HIT_STAGGER = 28.0
+const HIT_STAGGER = 10.0
 
 #bob variables
 const BOB_FREQ = 2.4
@@ -34,6 +34,7 @@ var instance
 @onready var gun_barrel = $Head/Camera3D/LaserGun/RayCast3D
 @onready var gun_anim2 = $Head/Camera3D/LaserGun2/AnimationPlayer
 @onready var gun_barrel2 = $Head/Camera3D/LaserGun2/RayCast3D
+@onready var raycast = $Head/Camera3D/RayCast3D
 
 var health:int = 100
 
@@ -96,6 +97,16 @@ func _physics_process(delta):
 			instance.position = gun_barrel.global_position
 			instance.transform.basis = gun_barrel.global_transform.basis
 			get_parent().add_child(instance)
+			#raycast.force_raycast_update()
+			
+			#if raycast.is_colliding(): 				
+			#	var collider = raycast.get_collider()
+			
+				# Hitting an enemy
+			
+			#	if collider.has_method("damage"):
+			#		collider.damage(1)
+				
 		if !gun_anim2.is_playing():
 			gun_anim2.play("Shoot")
 			instance = bullet.instantiate()
@@ -114,12 +125,8 @@ func _headbob(time) -> Vector3:
 	return pos
 
 
-func hit(dir):
-	emit_signal("player_hit")
+func damage(amount, dir):	
 	velocity += dir * HIT_STAGGER
-	damage(1) #TODO
-
-func damage(amount):	
 	health -= amount
 	health_updated.emit(health) # Update health on HUD
 	

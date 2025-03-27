@@ -13,6 +13,8 @@ const ATTACK_RANGE = 14.0
 var bullet = load("res://Scenes/Bullet.tscn")
 var instance
 
+var destroyed := false
+
 @onready var nav_agent = $NavigationAgent3D
 @onready var anim_tree = $AnimationTree
 @onready var raycast = $RayCast3D
@@ -72,9 +74,19 @@ func _fire():
 	instance.transform.basis = raycast.global_transform.basis
 	get_parent().add_child(instance)
 
-func _on_area_3d_body_part_hit(dam):
+func _on_area_3d_body_part_hit(dam): #TODO remove
 	health -= dam
 	if health <= 0:
 		state_machine = anim_tree["parameters/playback"]
 		state_machine.travel("Die")
+		
+func damage(amount, dir):
+	Audio.play("Sounds/enemy_hurt.ogg")
+
+	health -= amount
+
+	if health <= 0 and !destroyed:
+		destroyed = true
+		state_machine = anim_tree["parameters/playback"]
+		state_machine.travel("Die")		
 		

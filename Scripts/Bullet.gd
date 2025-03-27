@@ -30,11 +30,9 @@ func _process(delta):
 		ray.enabled = false
 		particles.visible = true
 		explosion.emitting = true
-		if ray.get_collider().is_in_group("enemy"):
-			ray.get_collider().hit()
-		if ray.get_collider().is_in_group("player"):
-			var dir = global_position.direction_to(player.global_position)
-			ray.get_collider().hit_player(dir)	
+		if ray.get_collider().has_method("damage"):
+			var dir = global_position.direction_to(player.global_position)	
+			ray.get_collider().damage(1, dir)		
 		if get_tree():	
 			await get_tree().create_timer(0.1).timeout
 		queue_free()
