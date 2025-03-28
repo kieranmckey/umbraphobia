@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=27 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="Texture2D" uid="uid://difglsmbfmw81" path="res://Textures/terrain.jpg" id="1_v880l"]
 [ext_resource type="Script" uid="uid://dgn4nnte55k83" path="res://Scripts/World.gd" id="1_yrgup"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://mb3smwxkwhah" path="res://Models/Corridors/corridor_detailed_2.tscn" id="8_6bnwl"]
 [ext_resource type="PackedScene" uid="uid://2nusbkuyv34f" path="res://Models/Corridors/corridor_corner_round_window_2.tscn" id="9_gtnb1"]
 [ext_resource type="PackedScene" uid="uid://crib1k4teeu8m" path="res://Scenes/Light_switch.tscn" id="11_q183u"]
+[ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="12_xiqgv"]
 [ext_resource type="PackedScene" uid="uid://kdfasdqo4jxo" path="res://Models/Rock/Rock.tscn" id="13_ers4l"]
 [ext_resource type="VoxelGIData" uid="uid://cqg0dm2e2owgi" path="res://Lighting/World.VoxelGI_data.res" id="15_avl7q"]
 [ext_resource type="PackedScene" uid="uid://c3x63pmql6c68" path="res://Models/Chimney/Chimney1.tscn" id="16_o5klw"]
@@ -220,7 +221,7 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 12, 0, 0)
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 12, 0, 12.6387)
 
 [node name="CraftB" parent="Map/NavigationRegion3D/LargeDecorations" instance=ExtResource("4_7gu3i")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5.60706, 0, 0)
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1.87142, 0, 0)
 
 [node name="craft_miner2" parent="Map/NavigationRegion3D/LargeDecorations" instance=ExtResource("5_hwbq5")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -26.2118, 0, 0)
@@ -380,6 +381,10 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -14.6476, 0.62667, 15.092)
 
 [node name="Player" parent="Map/NavigationRegion3D/PlayerCharacter" groups=["PlayerCharacter"] instance=ExtResource("31_jumwc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14273, 7)
+visible = false
+
+[node name="PlayerCharacter" parent="Map/NavigationRegion3D/PlayerCharacter" instance=ExtResource("12_xiqgv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.82, 1.54, 0)
 
 [node name="Moon" type="CSGSphere3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 937, 717, -683)
