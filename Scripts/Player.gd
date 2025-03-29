@@ -17,7 +17,7 @@ const BASE_FOV = 75.0
 const FOV_CHANGE = 1.5
 
 # signal
-signal player_hit
+#signal player_hit
 signal health_updated
 
 

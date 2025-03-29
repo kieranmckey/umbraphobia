@@ -12,7 +12,7 @@ const SPEED = 40.0
 
 var player = null
 
-@export var player_path := "/root/World/Map/NavigationRegion3D/PlayerCharacter/Player"
+@export var player_path := "/root/World/Map/NavigationRegion3D/PlayerCharacter/PlayerCharacter"
 
 
 
@@ -25,6 +25,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position += transform.basis * Vector3(0, 0, -SPEED) * delta
+	#move_and_collide(Vector3(0,0,SPEED * delta))
 	if ray.is_colliding():
 		mesh.visible = false		
 		ray.enabled = false

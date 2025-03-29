@@ -48,7 +48,7 @@ surface_material_override/9 = ExtResource("5_ua4i0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_kvmkc")
+&"": SubResource("AnimationLibrary_kvmkc")
 }
 
 [node name="RayCast3D" type="RayCast3D" parent="." index="2"]

@@ -44,6 +44,7 @@ var slopeAngle #angle of the slope the character is on
 var canInput : bool 
 var collisionInfo
 var wasOnFloor : bool
+var health:int = 100
 
 #jump variables
 @export_group("jump variables")
@@ -120,9 +121,15 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var floorCheck = $Raycasts/FloorCheck
 @onready var grappleHookCheck = $CameraHolder/Camera3D/GrappleHookCheck
 @onready var grapHookRope = $CameraHolder/Camera3D/GrappleHookRope
+@onready var gunAnimation = $CameraHolder/Camera3D/Pistol/AnimationPlayer
+@onready var gunBarrel = $CameraHolder/Camera3D/Pistol/RayCast3D 
 @onready var mesh = $MeshInstance3D
 @onready var hud = $HUD
 @onready var pauseMenu = $PauseMenu
+
+
+var bullet = load("res://Scenes/Bullet.tscn")
+var instance
 
 func _ready():
 	#set the start move speed
@@ -199,6 +206,18 @@ func inputManagement():
 					
 				if Input.is_action_just_pressed("grappleHook"):
 					grappleStateChanges()
+					
+				if Input.is_action_pressed("shoot"):
+					#shootStateChanges()
+					if !gunAnimation.is_playing():
+						gunAnimation.play("Shoot")
+						instance = bullet.instantiate()
+						instance.position = gunBarrel.global_position
+						instance.transform.basis = gunBarrel.global_transform.basis
+						get_tree().get_root().add_child(instance) #TODO
+						
+						
+			#raycast.force_raycast_update()	
 					
 			states.WALK:
 				if Input.is_action_just_pressed("run"):
@@ -294,6 +313,8 @@ func inputManagement():
 				if Input.is_action_just_pressed("grappleHook"):
 					grappleStateChanges()
 					
+					
+					
 func displayStats():
 	#call the functions in charge of displaying the controller properties
 	hud.displayCurrentState(currentState)
@@ -305,6 +326,7 @@ func displayStats():
 	hud.displayDashWaitTime(timeBeforeCanDashAgain)
 	hud.displayNbJumpsAllowedInAir(nbJumpsInAirAllowed)
 	hud.displayGrappleHookToolWaitTime(timeBeforeCanGrappleAgain)
+	hud.displayHealth(health)
 	
 	#not a property, but a visual
 	if currentState == states.DASH: hud.displaySpeedLines(dashTime)
@@ -754,3 +776,10 @@ func _on_object_tool_send_knockback(knockbackAmount : float, knockbackOrientatio
 	var knockbackForce = -knockbackOrientation * knockbackAmount #opposite of the knockback tool orientation, times knockback amount
 	velocity += knockbackForce if !is_on_floor() else knockbackForce/onFloorKnockbackDivider
 	
+func damage(amount, dir):	
+	velocity += dir * onFloorKnockbackDivider
+	health -= amount
+	#health_updated.emit(health) # Update health on HUD
+	
+	if health < 0: #TODO
+		get_tree().reload_current_scene() # Reset when out of health

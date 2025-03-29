@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://difglsmbfmw81" path="res://Textures/terrain.jpg" id="1_v880l"]
 [ext_resource type="Script" uid="uid://dgn4nnte55k83" path="res://Scripts/World.gd" id="1_yrgup"]
+[ext_resource type="Shader" uid="uid://btf3keagv4bnd" path="res://Scenes/Sky.gdshader" id="2_xiqgv"]
 [ext_resource type="PackedScene" uid="uid://cvnm5h1r8uxxk" path="res://Models/Craft/craft_b.tscn" id="4_7gu3i"]
 [ext_resource type="PackedScene" uid="uid://5xy421ddd0mk" path="res://Models/Craft/craft_miner_2.tscn" id="5_hwbq5"]
 [ext_resource type="PackedScene" uid="uid://cpjh4yc0mpg4u" path="res://Models/Barrels/barrel.tscn" id="7_5jic0"]
@@ -13,16 +14,32 @@
 [ext_resource type="VoxelGIData" uid="uid://cqg0dm2e2owgi" path="res://Lighting/World.VoxelGI_data.res" id="15_avl7q"]
 [ext_resource type="PackedScene" uid="uid://c3x63pmql6c68" path="res://Models/Chimney/Chimney1.tscn" id="16_o5klw"]
 [ext_resource type="PackedScene" uid="uid://d3xejhwjbwb5h" path="res://Models/CorridorWall/wall.tscn" id="29_ncx4a"]
-[ext_resource type="PackedScene" uid="uid://5iurrb07epis" path="res://Scenes/Player.tscn" id="31_jumwc"]
 [ext_resource type="Script" uid="uid://da50dbx34d87t" path="res://Scripts/HUD.gd" id="33_kv4gf"]
 [ext_resource type="FontFile" uid="uid://biqtga8moh7ah" path="res://Fonts/lilita_one_regular.ttf" id="34_rfvjl"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_t7442"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_waglr"]
+shader = ExtResource("2_xiqgv")
+shader_parameter/cloud_shape_sampler = ExtResource("1_v880l")
+shader_parameter/clouds_samples = 16
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.5
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_smoothness = 0.035
+shader_parameter/clouds_light_color = Color(0.744181, 0.744181, 0.744181, 1)
+shader_parameter/clouds_shadow_intensity = 1.0
+shader_parameter/high_clouds_density = 0.0
+shader_parameter/top_color = Color(1, 1, 1, 1)
+shader_parameter/bottom_color = Color(1, 1, 1, 1)
+shader_parameter/sun_scatter = Color(1, 1, 1, 1)
+shader_parameter/astro_tint = Color(0, 0, 0, 1)
+shader_parameter/astro_scale = 1.0
+shader_parameter/astro_intensity = 1.0
+shader_parameter/stars_intensity = 0.0
+shader_parameter/shooting_stars_intensity = 0.0
+shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
 
 [sub_resource type="Sky" id="Sky_vp35t"]
-sky_material = SubResource("ProceduralSkyMaterial_t7442")
+sky_material = SubResource("ShaderMaterial_waglr")
 
 [sub_resource type="Environment" id="Environment_t52a8"]
 background_mode = 2
@@ -190,11 +207,10 @@ script = ExtResource("1_yrgup")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
 transform = Transform3D(-0.603208, -0.409592, 0.684379, 0, 0.858065, 0.513541, -0.797584, 0.309772, -0.517592, 0, 0, 0)
 light_color = Color(0.700225, 0.746097, 1, 1)
-light_energy = 0.3
+light_energy = 2.261
 light_indirect_energy = 1.112
 light_volumetric_fog_energy = 0.136
 light_angular_distance = 5.0
-light_negative = true
 shadow_enabled = true
 sky_mode = 1
 
@@ -379,12 +395,10 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -14.6476, 0.62667, 15.092)
 
 [node name="PlayerCharacter" type="Node3D" parent="Map/NavigationRegion3D"]
 
-[node name="Player" parent="Map/NavigationRegion3D/PlayerCharacter" groups=["PlayerCharacter"] instance=ExtResource("31_jumwc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14273, 7)
-visible = false
-
 [node name="PlayerCharacter" parent="Map/NavigationRegion3D/PlayerCharacter" instance=ExtResource("12_xiqgv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.82, 1.54, 0)
+jumpHeight = 2.0
+nbJumpsInAirAllowed = 0
 
 [node name="Moon" type="CSGSphere3D" parent="Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 937, 717, -683)

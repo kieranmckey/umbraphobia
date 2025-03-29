@@ -8,10 +8,10 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 	
-func damage(amount, dir):
+func damage(amount, _dir):
 	Audio.play("sounds/enemy_hurt.ogg")
 
 	health -= amount

@@ -1,13 +1,14 @@
-[gd_scene load_steps=30 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=32 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" uid="uid://utnns802s0y8" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" uid="uid://2anm76u3kya5" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
+[ext_resource type="Shader" uid="uid://dgsuif35j4lcf" path="res://Shaders/Opal.gdshader" id="3_ntc8i"]
 [ext_resource type="Script" uid="uid://yf7rab4p8s7u" path="res://Scripts/Others/ObjectToolScript.gd" id="4_4bdjt"]
 [ext_resource type="Script" uid="uid://dvknb0mu16npg" path="res://Scripts/PlayerCharacter/UI/HUDScript.gd" id="4_f4mp1"]
-[ext_resource type="PackedScene" uid="uid://btu85nybswgdo" path="res://Scenes/pistol.tscn" id="5_k4h75"]
+[ext_resource type="PackedScene" uid="uid://btu85nybswgdo" path="res://Scenes/Pistol.tscn" id="5_k4h75"]
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Fonts/Ticketing.ttf" id="5_kleop"]
 [ext_resource type="PackedScene" uid="uid://dh3ln04ijax8n" path="res://Scenes/PauseMenuScene.tscn" id="6_3wmtt"]
-[ext_resource type="Texture2D" uid="uid://dvui2i8argap0" path="res://Textures/texture_06.png" id="7_jclwn"]
+[ext_resource type="FontFile" uid="uid://biqtga8moh7ah" path="res://Fonts/lilita_one_regular.ttf" id="9_ntc8i"]
 [ext_resource type="Shader" uid="uid://cveksnmpffthn" path="res://Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
 [sub_resource type="Curve" id="Curve_qvv7t"]
@@ -20,8 +21,15 @@ _limits = [0.0, 10.0, 0.0, 1.0]
 _data = [Vector2(0.245902, 8.66031), 0.0, 0.0, 0, 0, Vector2(0.577869, 7.86641), 0.0, 0.0, 0, 0, Vector2(0.901639, 6.97328), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n0b8a"]
-albedo_texture = ExtResource("7_jclwn")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h128t"]
+render_priority = 0
+shader = ExtResource("3_ntc8i")
+shader_parameter/base = Color(0.0853448, 0.973712, 0.830615, 1)
+shader_parameter/highlight1 = Color(0.328943, 0.720689, 0.309463, 1)
+shader_parameter/highlight2 = Color(0.772591, 0.958745, 0.249389, 1)
+shader_parameter/noise_scale = 50.0
+shader_parameter/roughness = 0.1
+shader_parameter/shift_intensity = 0.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_x05rw"]
 
@@ -152,8 +160,16 @@ font_size = 20
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_h128t"]
+font = ExtResource("9_ntc8i")
+font_size = 36
+outline_size = 12
+outline_color = Color(0, 0, 0, 0.470588)
+shadow_color = Color(0, 0, 0, 1)
+
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter"]]
 collision_layer = 2
+collision_mask = 3
 floor_block_on_wall = false
 floor_max_angle = 1.309
 floor_snap_length = 0.0
@@ -245,7 +261,7 @@ visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CameraHolder/Camera3D/GrappleHookRope"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_n0b8a")
+material_override = SubResource("ShaderMaterial_h128t")
 mesh = SubResource("CylinderMesh_x05rw")
 
 [node name="ObjectTool" type="Node3D" parent="CameraHolder/Camera3D"]
@@ -271,7 +287,7 @@ libraries = {
 }
 
 [node name="Pistol" parent="CameraHolder/Camera3D" instance=ExtResource("5_k4h75")]
-transform = Transform3D(-0.00287973, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00287973, 0.172198, -0.243951, -0.124784)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.172198, -0.243951, -0.124784)
 
 [node name="standingHitbox" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_5yjma")
@@ -360,7 +376,6 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
-visible = false
 layout_mode = 0
 offset_left = 7.0
 offset_right = 811.0
@@ -548,6 +563,22 @@ theme_override_font_sizes/font_size = 40
 text = "..................."
 label_settings = SubResource("LabelSettings_02rm5")
 vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 48.0
+offset_right = 1025.0
+offset_bottom = 94.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Health" type="Label" parent="HUD/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "100%"
+label_settings = SubResource("LabelSettings_h128t")
+vertical_alignment = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_3wmtt")]
 visible = false

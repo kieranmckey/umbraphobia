@@ -16,6 +16,7 @@ class_name HUD
 @onready var grappleToolWaitTimeLabelText = $HBoxContainer/VBoxContainer2/GrappleToolWaitTimeLabelText
 @onready var framesPerSecondLabelText = $HBoxContainer/VBoxContainer2/FramesPerSecondLabelText
 @onready var speedLinesContainer = $SpeedLinesContrainer
+@onready var healthText = $HBoxContainer2/VBoxContainer/Health
 
 func _ready():
 	speedLinesContainer.visible = false #the speed lines will only be displayed when the character will dashing
@@ -91,7 +92,13 @@ func displaySpeedLines(dashTime):
 	#when the dash is finished, hide the speed lines
 	await get_tree().create_timer(dashTime).timeout
 	speedLinesContainer.visible = false 
+
+func displayHealth(health : int):
+	#this function manage the health displayment
+	healthText.set_text(str(health)+"%")
 	
 func _process(_delta):
 	#this function manage the frames per second displayment
 	framesPerSecondLabelText.set_text(str(Engine.get_frames_per_second()))
+	
+	

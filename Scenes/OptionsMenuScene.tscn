@@ -27,10 +27,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 2
+current_tab = 0
 
 [node name="Controls" type="MarginContainer" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -143,6 +142,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="Audio" type="MarginContainer" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -213,7 +213,7 @@ step = 0.001
 value = 1.0
 editable = false
 script = ExtResource("4_ss2nf")
-busName = "AudioBus"
+busName = "Master"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders"]
 modulate = Color(1, 1, 1, 0)
