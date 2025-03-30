@@ -70,19 +70,20 @@ func _hit_finished():
 
 
 func _fireTODO():
-	var bullet = bullet.instantiate()
-	bullet.position = raycast.global_position 
-	bullet.transform.basis = raycast.global_transform.basis
+	instance = bullet.instantiate()
+	instance.position = raycast.global_position 
+	instance.transform.basis = raycast.global_transform.basis
 	get_parent().add_child(instance)
-	bullet.look_at(player.global_transform.origin, Vector3.UP)
+	instance.look_at(player.global_transform.origin, Vector3.UP)
 	
 	#bullet.global_transform.origin = raycast.global_transform.origin
 
 func _fire():	
 	instance = bullet.instantiate()
+	get_parent().add_child(instance)
 	instance.position = raycast.global_position # todo add correct gun pos
 	instance.transform.basis = raycast.global_transform.basis
-	get_parent().add_child(instance)
+	#get_parent().add_child(instance)
 
 func _on_area_3d_body_part_hit(dam): #TODO remove
 	health -= dam
@@ -91,7 +92,8 @@ func _on_area_3d_body_part_hit(dam): #TODO remove
 		state_machine.travel("Die")
 		
 func damage(amount, _dir):
-	Audio.play("Sounds/enemy_hurt.ogg")
+	#Audio.play("Sounds/enemy_hurt.ogg")
+	Audio.play("Sounds/Impacts/electric-impact-37128.mp3")
 
 	health -= amount
 

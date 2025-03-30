@@ -6,7 +6,7 @@ class_name PlayerCharacter
 #states variables
 enum states
 {
-	IDLE, WALK, RUN, CROUCH, SLIDE, JUMP, INAIR, ONWALL, DASH, GRAPPLE
+	IDLE, WALK, RUN, CROUCH, SLIDE, JUMP, INAIR, ONWALL, DASH, GRAPPLE, DEAD
 }
 var currentState 
 
@@ -196,6 +196,9 @@ func inputManagement():
 	
 	if canInput:
 		match currentState:
+			states.DEAD:
+				return
+				
 			states.IDLE:
 				if Input.is_action_just_pressed("jump"):
 					jump(0.0, false)
@@ -212,9 +215,10 @@ func inputManagement():
 					if !gunAnimation.is_playing():
 						gunAnimation.play("Shoot")
 						instance = bullet.instantiate()
+						get_tree().get_root().add_child(instance) 
 						instance.position = gunBarrel.global_position
 						instance.transform.basis = gunBarrel.global_transform.basis
-						get_tree().get_root().add_child(instance) #TODO
+						#get_tree().get_root().add_child(instance) #TODO
 						
 						
 			#raycast.force_raycast_update()	
@@ -782,4 +786,5 @@ func damage(amount, dir):
 	#health_updated.emit(health) # Update health on HUD
 	
 	if health < 0: #TODO
+		currentState = states.DEAD
 		get_tree().reload_current_scene() # Reset when out of health

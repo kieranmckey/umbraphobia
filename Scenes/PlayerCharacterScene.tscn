@@ -364,7 +364,6 @@ points = PackedVector2Array(-5, 0, -15, 0)
 width = 2.0
 
 [node name="SpeedLinesContrainer" type="ColorRect" parent="HUD"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_fk5op")
 layout_mode = 1

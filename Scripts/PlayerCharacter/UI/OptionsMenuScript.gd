@@ -37,6 +37,7 @@ var volumeIsMute : bool = false
 var optionsMenuEnabled : bool = false
 
 func _ready():
+	$TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders/MusicVolumeSlider.value = 0.25
 	setOptionsMenu(false)
 	
 	createInputsList()
@@ -47,6 +48,7 @@ func setOptionsMenu(value : float):
 	#set the options penu behaviour
 	visible = value
 	optionsMenuEnabled = value
+	
 	
 # -------------------------------- Input part ----------------------------------
 func createInputsList():

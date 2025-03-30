@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var hit_rect = $CanvasLayer/HitRect
+#@onready var hit_rect = $CanvasLayer/HitRect #TODO
 @onready var spawns = $Map/Spawns
 @onready var navigation_region = $Map/NavigationRegion3D
 
@@ -16,12 +16,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
-
-
-func _on_player_player_hit():
-	hit_rect.visible = true
-	await get_tree().create_timer(0.2).timeout
-	hit_rect.visible = false
 
 
 func _get_random_child(parent_node):
