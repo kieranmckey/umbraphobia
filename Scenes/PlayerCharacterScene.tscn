@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://utnns802s0y8" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" uid="uid://2anm76u3kya5" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
-[ext_resource type="Shader" uid="uid://dgsuif35j4lcf" path="res://Shaders/Opal.gdshader" id="3_ntc8i"]
+[ext_resource type="Shader" uid="uid://db8r4sk6ophnh" path="res://Shaders/Weapon.gdshader" id="3_ntc8i"]
 [ext_resource type="Script" uid="uid://yf7rab4p8s7u" path="res://Scripts/Others/ObjectToolScript.gd" id="4_4bdjt"]
 [ext_resource type="Script" uid="uid://dvknb0mu16npg" path="res://Scripts/PlayerCharacter/UI/HUDScript.gd" id="4_f4mp1"]
 [ext_resource type="PackedScene" uid="uid://btu85nybswgdo" path="res://Scenes/Pistol.tscn" id="5_k4h75"]
@@ -24,12 +24,11 @@ point_count = 3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h128t"]
 render_priority = 0
 shader = ExtResource("3_ntc8i")
-shader_parameter/base = Color(0.0853448, 0.973712, 0.830615, 1)
-shader_parameter/highlight1 = Color(0.328943, 0.720689, 0.309463, 1)
-shader_parameter/highlight2 = Color(0.772591, 0.958745, 0.249389, 1)
-shader_parameter/noise_scale = 50.0
-shader_parameter/roughness = 0.1
-shader_parameter/shift_intensity = 0.0
+shader_parameter/scale = Vector3(2, 2, 2)
+shader_parameter/width = 1.132
+shader_parameter/sharpness = 0.5
+shader_parameter/glow = 4.0
+shader_parameter/color = Color(0.278431, 1, 1, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_x05rw"]
 
@@ -168,7 +167,7 @@ outline_color = Color(0, 0, 0, 0.470588)
 shadow_color = Color(0, 0, 0, 1)
 
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter"]]
-collision_layer = 2
+collision_layer = 3
 collision_mask = 3
 floor_block_on_wall = false
 floor_max_angle = 1.309
@@ -278,7 +277,8 @@ skeleton = NodePath("")
 [node name="KnockbackToolAttackPoint" type="Node3D" parent="CameraHolder/Camera3D/ObjectTool/KnockbackTool"]
 
 [node name="GrappleTool" type="MeshInstance3D" parent="CameraHolder/Camera3D/ObjectTool"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 5.94996e-08, -0.515336, -1.36119)
+transform = Transform3D(3.50169e-10, -0.00801094, -0.999968, -1, -4.37114e-08, 0, -4.371e-08, 0.999968, -0.00801094, 5.94996e-08, -0.515336, -1.36119)
+visible = false
 mesh = SubResource("BoxMesh_rsygy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CameraHolder/Camera3D/ObjectTool"]

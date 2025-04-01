@@ -27,12 +27,12 @@ func _ready():
 func _process(delta):
 	position += transform.basis * Vector3(0, 0, -SPEED) * delta
 	#move_and_collide(Vector3(0,0,SPEED * delta))
-	if ray.is_colliding():
+	if ray.is_colliding():		
 		impact.play()
 		mesh.visible = false		
 		ray.enabled = false
 		particles.visible = true
-		explosion.emitting = true
+		explosion.emitting = true		
 		if ray.get_collider().has_method("damage"):			
 			var dir = global_position.direction_to(player.global_position)	
 			ray.get_collider().damage(1, dir)		

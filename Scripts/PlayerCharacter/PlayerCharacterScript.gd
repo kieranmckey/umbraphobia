@@ -211,15 +211,7 @@ func inputManagement():
 					grappleStateChanges()
 					
 				if Input.is_action_pressed("shoot"):
-					#shootStateChanges()
-					if !gunAnimation.is_playing():
-						gunAnimation.play("Shoot")
-						instance = bullet.instantiate()
-						get_tree().get_root().add_child(instance) 
-						instance.position = gunBarrel.global_position
-						instance.transform.basis = gunBarrel.global_transform.basis
-						#get_tree().get_root().add_child(instance) #TODO
-						
+					shoot()
 						
 			#raycast.force_raycast_update()	
 					
@@ -239,6 +231,9 @@ func inputManagement():
 					
 				if Input.is_action_just_pressed("grappleHook"):
 					grappleStateChanges()
+					
+				if Input.is_action_pressed("shoot"):
+					shoot()	
 					
 			states.RUN:
 				if Input.is_action_just_pressed("run"):
@@ -263,6 +258,9 @@ func inputManagement():
 				
 				if Input.is_action_just_pressed("crouch | slide") and !ceilingCheck.is_colliding(): 
 					walkStateChanges()
+				
+				if Input.is_action_pressed("shoot"):
+					shoot()	
 					
 			states.SLIDE: 
 				if Input.is_action_just_pressed("run"):
@@ -603,7 +601,15 @@ func jump(jumpBoostValue : float, isJumpBoost : bool):
 func jumpBuffering():
 	#if the character is falling, and the floor check raycast is colliding and the jump properties are good, enable jump buffering
 	if floorCheck.is_colliding() and lastFramePosition.y > position.y and nbJumpsInAirAllowed <= 0 and jumpCooldown <= 0.0: jumpBuffOn = true
-	
+
+func shoot():
+	if !gunAnimation.is_playing():
+		gunAnimation.play("Shoot")
+		instance = bullet.instantiate()
+		get_tree().get_root().add_child(instance) 
+		instance.position = gunBarrel.global_position
+		instance.transform.basis = gunBarrel.global_transform.basis
+
 func grappleHookManagement(delta : float):
 	var distToAnchorPoint : float #distance entre le personnae et le point d'ancrage du grappin
 	
@@ -765,6 +771,8 @@ func grappleStateChanges():
 func collisionHandling():
 	#this function handle the collisions, but in this case, only the collision with a wall, to detect if the character can wallrun
 	if is_on_wall():
+		#return
+		
 		var lastCollision = get_slide_collision(0)
 		
 		if lastCollision:
