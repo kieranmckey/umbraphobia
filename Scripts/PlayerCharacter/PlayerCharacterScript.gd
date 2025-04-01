@@ -769,6 +769,7 @@ func grappleStateChanges():
 			else: currentState = states.INAIR
 			
 func collisionHandling():
+	return
 	#this function handle the collisions, but in this case, only the collision with a wall, to detect if the character can wallrun
 	if is_on_wall():
 		#return

@@ -37,7 +37,7 @@ var volumeIsMute : bool = false
 var optionsMenuEnabled : bool = false
 
 func _ready():
-	$TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders/MusicVolumeSlider.value = 0.25
+	$TabContainer/Audio/CenterContainer/VBoxContainer/VolumesSliders/MusicVolumeSlider.value = 0.15
 	setOptionsMenu(false)
 	
 	createInputsList()
