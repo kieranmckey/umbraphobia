@@ -62,4 +62,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.238855, 0.271014, 0)
 stream = ExtResource("3_qvus8")
 attenuation_model = 1
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

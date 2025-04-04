@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://5iurrb07epis"]
 
-[ext_resource type="Script" uid="uid://b0e47m8pfxj13" path="res://Scripts/Player.gd" id="1_ueh2c"]
+[ext_resource type="Script" uid="uid://b0e47m8pfxj13" path="res://TrashCan/Player.gd" id="1_ueh2c"]
 [ext_resource type="PackedScene" uid="uid://bqpwh2qhltcpn" path="res://Scenes/Rifle.tscn" id="2_kpw2n"]
 [ext_resource type="PackedScene" uid="uid://dmpgna52b44we" path="res://Scenes/Laser_gun.tscn" id="4_se6ew"]
 [ext_resource type="PackedScene" uid="uid://btu85nybswgdo" path="res://Scenes/Pistol.tscn" id="5_y0wsq"]

@@ -2,16 +2,30 @@ extends Node3D
 
 #@onready var hit_rect = $CanvasLayer/HitRect #TODO
 @onready var spawns = $Map/Spawns
+@onready var interruptSpawns = $Map/InterruptSpawns
 @onready var navigation_region = $Map/NavigationRegion3D
+@onready var interruptorsState = $Control/HBoxContainer3/VBoxContainer2/InterruptorsState
+
+@export var interruptorNumber = 10
+
+var currentInterruptorNumber
 
 var alien = load("res://Scenes/Alien.tscn")
+var interruptor = load("res://Scenes/Light_switch.tscn")
 var instance
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-
+	for i in interruptorNumber:
+		var spawn_point = _get_random_child(interruptSpawns).global_position
+		instance = interruptor.instantiate()
+		instance.position = spawn_point
+		instance.scale = Vector3(2.0, 2.0, 2.0)
+		navigation_region.add_child(instance)
+	currentInterruptorNumber = interruptorNumber + 1
+	_on_interruptor_dead()	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -27,3 +41,12 @@ func _on_zombie_spawn_timer_timeout():
 	instance = alien.instantiate()
 	instance.position = spawn_point
 	navigation_region.add_child(instance)
+	
+func _on_interruptor_dead():
+	currentInterruptorNumber = currentInterruptorNumber - 1
+	interruptorsState.set_text(str(currentInterruptorNumber))
+		
+
+
+func _on_area_3d_area_entered(area):
+	pass # Replace with function body.
