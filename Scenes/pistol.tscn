@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://btu85nybswgdo"]
+[gd_scene load_steps=36 format=4 uid="uid://btu85nybswgdo"]
 
 [ext_resource type="Texture2D" uid="uid://cn0a73525mh6s" path="res://Models/Pistol/army_sci-pistol_ready_for_unreal_engine_0.png" id="1_1y6m3"]
 [ext_resource type="Texture2D" uid="uid://dcokheg0lh0ld" path="res://Models/Pistol/army_sci-pistol_ready_for_unreal_engine_2.jpg" id="2_y241n"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b0r5ty5dcscm1" path="res://Models/Pistol/army_sci-pistol_ready_for_unreal_engine_7.png" id="8_mr50s"]
 [ext_resource type="Texture2D" uid="uid://07gics8yjk0m" path="res://Models/Pistol/army_sci-pistol_ready_for_unreal_engine_8.png" id="9_k14s4"]
 [ext_resource type="Texture2D" uid="uid://dsw8aqnor5kim" path="res://Models/Pistol/army_sci-pistol_ready_for_unreal_engine_9.png" id="10_a3kvo"]
+[ext_resource type="AudioStream" uid="uid://bbsi55mcsg708" path="res://Sounds/Lasers/alien-blaster.wav" id="12_mrs54"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e25uo"]
 resource_name = "GlowZones3"
@@ -317,44 +318,110 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_gvh8o")
 
+[sub_resource type="Animation" id="Animation_wg6nb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nmwvo"]
+resource_name = "Shoot"
+length = 0.16
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.0003, 0.0004, 0.0005, 0.03, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 0.203063, 2.92817),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0.05), Vector3(0, 0, 0)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D/AudioStreamPlayer3D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.2632,
+"start_offset": 0.0,
+"stream": ExtResource("12_mrs54")
+}],
+"times": PackedFloat32Array(0.01)
+}
+tracks/1/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mrs54"]
+_data = {
+&"RESET": SubResource("Animation_wg6nb"),
+&"Shoot": SubResource("Animation_nmwvo")
+}
+
 [node name="Pistol" type="Node3D"]
-transform = Transform3D(-0.00287973, 0, -0.999996, 0, 1, 0, 0.999996, 0, -0.00287973, 0, 0, 0.0605715)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="Sketchfab_model" type="Node3D" parent="."]
-transform = Transform3D(4.44089e-16, -1, 7.39557e-32, 6.12323e-17, -2.46519e-32, -1, 1, 4.44089e-16, 6.12323e-17, 0, 0, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
-[node name="Pistol_fbx" type="Node3D" parent="Sketchfab_model"]
-transform = Transform3D(0.01, 0, 0, 0, -0.01, 0, 0, 0, -0.01, 0, 0, 0)
-
-[node name="RootNode" type="Node3D" parent="Sketchfab_model/Pistol_fbx"]
-
-[node name="sci_Pistol" type="Node3D" parent="Sketchfab_model/Pistol_fbx/RootNode"]
-transform = Transform3D(-1.62921e-05, 20.7124, 0, -100, -3.37448e-06, 0, 0, 0, 66.1433, 0, 0, 0)
-
-[node name="sci_Pistol_GlowZones3_0" type="MeshInstance3D" parent="Sketchfab_model/Pistol_fbx/RootNode/sci_Pistol"]
+[node name="sci_Pistol_GlowZones3_0" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62921e-07, 0.207124, 2.11758e-22, -4.37114e-08, -1.47503e-15, 0.661433, 1, 3.37448e-08, 2.89122e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_o1qf8")
 skeleton = NodePath("")
 
-[node name="sci_Pistol_MainMaterial_0" type="MeshInstance3D" parent="Sketchfab_model/Pistol_fbx/RootNode/sci_Pistol"]
+[node name="sci_Pistol_MainMaterial_0" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62921e-07, 0.207124, 2.11758e-22, -4.37114e-08, -1.47503e-15, 0.661433, 1, 3.37448e-08, 2.89122e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_a6o6m")
 skeleton = NodePath("")
 
-[node name="sci_Pistol_GlowZones2_0" type="MeshInstance3D" parent="Sketchfab_model/Pistol_fbx/RootNode/sci_Pistol"]
+[node name="sci_Pistol_GlowZones2_0" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62921e-07, 0.207124, 2.11758e-22, -4.37114e-08, -1.47503e-15, 0.661433, 1, 3.37448e-08, 2.89122e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_lt710")
 skeleton = NodePath("")
 
-[node name="sci_Pistol_Covers_0" type="MeshInstance3D" parent="Sketchfab_model/Pistol_fbx/RootNode/sci_Pistol"]
+[node name="sci_Pistol_Covers_0" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62921e-07, 0.207124, 2.11758e-22, -4.37114e-08, -1.47503e-15, 0.661433, 1, 3.37448e-08, 2.89122e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_r3k5o")
 skeleton = NodePath("")
 
-[node name="sci_Pistol_Grip_0" type="MeshInstance3D" parent="Sketchfab_model/Pistol_fbx/RootNode/sci_Pistol"]
+[node name="sci_Pistol_Grip_0" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62921e-07, 0.207124, 2.11758e-22, -4.37114e-08, -1.47503e-15, 0.661433, 1, 3.37448e-08, 2.89122e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1m0ki")
 skeleton = NodePath("")
 
-[node name="sci_Pistol_GlowZones1_0" type="MeshInstance3D" parent="Sketchfab_model/Pistol_fbx/RootNode/sci_Pistol"]
+[node name="sci_Pistol_GlowZones1_0" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62921e-07, 0.207124, 2.11758e-22, -4.37114e-08, -1.47503e-15, 0.661433, 1, 3.37448e-08, 2.89122e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ojrix")
 skeleton = NodePath("")
 
-[node name="sci_Pistol_Trigger_0" type="MeshInstance3D" parent="Sketchfab_model/Pistol_fbx/RootNode/sci_Pistol"]
+[node name="sci_Pistol_Trigger_0" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-1.62921e-07, 0.207124, 2.11758e-22, -4.37114e-08, -1.47503e-15, 0.661433, 1, 3.37448e-08, 2.89122e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_fot5h")
 skeleton = NodePath("")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34021e-08, 0.0781541, 0.153302)
+attenuation_model = 1
+volume_db = -20.0
+max_db = 2.0
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.00097915, 0.0918784, 0.396732)
+target_position = Vector3(0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mrs54")
+}

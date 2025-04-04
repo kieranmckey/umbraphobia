@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgfqjiqk6v1nr"]
+
+[ext_resource type="Script" uid="uid://db0bp3agra0qy" path="res://Scripts/StartMenu.gd" id="1_7mj41"]
+[ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Fonts/Ticketing.ttf" id="2_okdm3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eaa6r"]
+line_spacing = 5.0
+font = ExtResource("2_okdm3")
+font_size = 80
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="StartMenu" type="CanvasLayer" node_paths=PackedStringArray("optionsMenu")]
+script = ExtResource("1_7mj41")
+optionsMenu = NodePath("")
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer2"]
+custom_minimum_size = Vector2(700, 600)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer2/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2/PanelContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="PausedLabel" type="Label" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Umbraphobia"
+label_settings = SubResource("LabelSettings_eaa6r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="ResumeButton" type="Button" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_okdm3")
+theme_override_font_sizes/font_size = 55
+text = "Start"
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="QuitButton" type="Button" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_okdm3")
+theme_override_font_sizes/font_size = 55
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

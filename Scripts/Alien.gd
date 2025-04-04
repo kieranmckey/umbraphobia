@@ -2,12 +2,12 @@ extends CharacterBody3D
 
 var player = null
 var state_machine
-var health = 2
+var health = 1
 
 const SPEED = 4.0
 const ATTACK_RANGE = 14.0
 
-@export var player_path := "/root/World/Map/NavigationRegion3D/Player"
+@export var player_path := "/root/World/Map/NavigationRegion3D/PlayerCharacter/PlayerCharacter"
 
 # Bullets
 var bullet = load("res://Scenes/Bullet.tscn")
@@ -68,11 +68,22 @@ func _hit_finished():
 		var dir = global_position.direction_to(player.global_position)
 		player.hit(dir)
 
-func _fire():
+
+func _fireTODO():
 	instance = bullet.instantiate()
-	instance.position = raycast.global_position # todo add correct gun pos
+	instance.position = raycast.global_position 
 	instance.transform.basis = raycast.global_transform.basis
 	get_parent().add_child(instance)
+	instance.look_at(player.global_transform.origin, Vector3.UP)
+	
+	#bullet.global_transform.origin = raycast.global_transform.origin
+
+func _fire():	
+	instance = bullet.instantiate()
+	get_parent().add_child(instance)
+	instance.position = raycast.global_position # todo add correct gun pos
+	instance.transform.basis = raycast.global_transform.basis
+	#get_parent().add_child(instance)
 
 func _on_area_3d_body_part_hit(dam): #TODO remove
 	health -= dam
@@ -80,8 +91,9 @@ func _on_area_3d_body_part_hit(dam): #TODO remove
 		state_machine = anim_tree["parameters/playback"]
 		state_machine.travel("Die")
 		
-func damage(amount, dir):
-	Audio.play("Sounds/enemy_hurt.ogg")
+func damage(amount, _dir):
+	#Audio.play("Sounds/enemy_hurt.ogg")
+	Audio.play("Sounds/Impacts/electric-impact-37128.mp3")
 
 	health -= amount
 
