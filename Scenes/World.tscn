@@ -115,10 +115,10 @@ emission = Color(1, 0, 0.211765, 1)
 emission_energy_multiplier = 9.09
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mvfa8"]
-size = Vector3(20, 1, 20)
+size = Vector3(20, 1, 30)
 
 [sub_resource type="BoxMesh" id="BoxMesh_r0dna"]
-size = Vector3(20, 1, 20)
+size = Vector3(20, 1, 30)
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_b5aes"]
 shuffle = true
@@ -685,7 +685,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03292, 0, -13.2874)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03292, 0, -13.2874)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.124, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 15, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/StaticBody3D"]
 shape = SubResource("BoxShape3D_mvfa8")
