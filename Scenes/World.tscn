@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=35 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="Texture2D" uid="uid://difglsmbfmw81" path="res://Textures/terrain.jpg" id="1_v880l"]
 [ext_resource type="Script" uid="uid://dgn4nnte55k83" path="res://Scripts/World.gd" id="1_yrgup"]
@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://cmyge3c53uem1" path="res://Music/eclipse-moire-main-version-01-58-12188.mp3" id="17_mvfa8"]
 [ext_resource type="AudioStream" uid="uid://bfdsaj7fcl1do" path="res://Music/wild-hunt-tatami-main-version-02-08-18293.mp3" id="18_r0dna"]
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Fonts/Ticketing.ttf" id="19_mvfa8"]
+[ext_resource type="PackedScene" uid="uid://cgfqjiqk6v1nr" path="res://Scenes/StartMenuScene.tscn" id="20_r0dna"]
 [ext_resource type="PackedScene" uid="uid://d3xejhwjbwb5h" path="res://Models/CorridorWall/wall.tscn" id="29_ncx4a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_waglr"]
@@ -737,6 +738,8 @@ theme_override_font_sizes/font_size = 40
 text = "..................."
 label_settings = SubResource("LabelSettings_b5aes")
 vertical_alignment = 1
+
+[node name="StartMenu" parent="." instance=ExtResource("20_r0dna")]
 
 [connection signal="area_entered" from="Map/NavigationRegion3D/JumpPad/Area3D" to="Map/NavigationRegion3D/JumpPad" method="_on_area_3d_area_entered"]
 [connection signal="timeout" from="ZombieSpawnTimer" to="." method="_on_zombie_spawn_timer_timeout"]

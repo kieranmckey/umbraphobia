@@ -9,17 +9,7 @@ func _ready():
 	setPauseMenu(false, false)
 	
 func _process(_delta):
-	#this function manage the mouse state
-	#when the mouse is captured, you can't see it, and she's disable (not for the movement detection, but for the on screen inputs)
-	#when the mouse is visible, you can see it, and she's enable
-	if Input.is_action_just_pressed("pauseMenu") and Engine.time_scale > 0.0:
-		if !optionsMenu.optionsMenuEnabled:
-			if pauseMenuEnabled: setPauseMenu(false, false)
-			else: setPauseMenu(true, true)
-		
-			#handle mouse mode
-			if mouseFree: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			else: Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	pass
 			
 func setPauseMenu(value : bool, enable : bool):
 	#set the pause penu behaviour (visibility, mouse control, ...)
@@ -30,6 +20,9 @@ func setPauseMenu(value : bool, enable : bool):
 	#stop game process when the pause menu is enabled
 	if pauseMenuEnabled: Engine.time_scale = 0.0
 	else: Engine.time_scale = 1.0
+	
+	if mouseFree: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else: Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _on_resume_button_pressed():
 	#close pause menu

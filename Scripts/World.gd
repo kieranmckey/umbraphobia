@@ -5,6 +5,7 @@ extends Node3D
 @onready var interruptSpawns = $Map/InterruptSpawns
 @onready var navigation_region = $Map/NavigationRegion3D
 @onready var interruptorsState = $Control/HBoxContainer3/VBoxContainer2/InterruptorsState
+@onready var startMenu = $StartMenu
 
 @export var interruptorNumber = 10
 
@@ -17,6 +18,7 @@ var instance
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	startMenu.setPauseMenu(true, true)
 	randomize()
 	for i in interruptorNumber:
 		var spawn_point = _get_random_child(interruptSpawns).global_position
@@ -24,8 +26,11 @@ func _ready():
 		instance.position = spawn_point
 		instance.scale = Vector3(2.0, 2.0, 2.0)
 		navigation_region.add_child(instance)
-	currentInterruptorNumber = interruptorNumber + 1
-	_on_interruptor_dead()	
+	
+	interruptorsState.set_text(str(interruptorNumber))
+	currentInterruptorNumber = interruptorNumber
+	
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
