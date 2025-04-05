@@ -6,7 +6,7 @@ var mouseFree : bool = false
 @export var optionsMenu : CanvasLayer 
 
 func _ready():
-	setPauseMenu(false, false)
+	pass#setPauseMenu(false, false)
 	
 func _process(_delta):
 	pass

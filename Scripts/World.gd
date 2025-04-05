@@ -4,8 +4,10 @@ extends Node3D
 @onready var spawns = $Map/Spawns
 @onready var interruptSpawns = $Map/InterruptSpawns
 @onready var navigation_region = $Map/NavigationRegion3D
-@onready var interruptorsState = $Control/HBoxContainer3/VBoxContainer2/InterruptorsState
+@onready var interruptorsState = $WorldHUD/HBoxContainer3/VBoxContainer2/InterruptorsState
 @onready var startMenu = $StartMenu
+@onready var missionBriefPlayer = $MissionBrief/AnimationPlayer
+@onready var missionBrief = $MissionBrief
 
 @export var interruptorNumber = 10
 
@@ -29,6 +31,7 @@ func _ready():
 	
 	interruptorsState.set_text(str(interruptorNumber))
 	currentInterruptorNumber = interruptorNumber
+	missionBriefPlayer.play('ShowBrief')
 	
 	
 
@@ -53,5 +56,13 @@ func _on_interruptor_dead():
 		
 
 
-func _on_area_3d_area_entered(area):
+func _on_area_3d_area_entered(_area):
 	pass # Replace with function body.
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name=='ShowBrief':
+		missionBrief.visible = false
+		
+		
+		

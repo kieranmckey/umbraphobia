@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://db8r4sk6ophnh" path="res://Shaders/Weapon.gdshader" id="3_ntc8i"]
 [ext_resource type="Script" uid="uid://yf7rab4p8s7u" path="res://Scripts/Others/ObjectToolScript.gd" id="4_4bdjt"]
 [ext_resource type="Script" uid="uid://dvknb0mu16npg" path="res://Scripts/PlayerCharacter/UI/HUDScript.gd" id="4_f4mp1"]
-[ext_resource type="PackedScene" uid="uid://btu85nybswgdo" path="res://Scenes/Pistol.tscn" id="5_k4h75"]
+[ext_resource type="PackedScene" uid="uid://btu85nybswgdo" path="res://Scenes/pistol.tscn" id="5_k4h75"]
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Fonts/Ticketing.ttf" id="5_kleop"]
 [ext_resource type="PackedScene" uid="uid://dh3ln04ijax8n" path="res://Scenes/PauseMenuScene.tscn" id="6_3wmtt"]
 [ext_resource type="FontFile" uid="uid://biqtga8moh7ah" path="res://Fonts/lilita_one_regular.ttf" id="9_ntc8i"]
@@ -161,7 +161,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_h128t"]
 font = ExtResource("9_ntc8i")
-font_size = 36
+font_size = 50
 outline_size = 12
 outline_color = Color(0, 0, 0, 0.470588)
 shadow_color = Color(0, 0, 0, 1)

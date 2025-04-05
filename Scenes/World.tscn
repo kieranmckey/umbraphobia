@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=39 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="Texture2D" uid="uid://difglsmbfmw81" path="res://Textures/terrain.jpg" id="1_v880l"]
 [ext_resource type="Script" uid="uid://dgn4nnte55k83" path="res://Scripts/World.gd" id="1_yrgup"]
@@ -11,14 +11,15 @@
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="12_xiqgv"]
 [ext_resource type="PackedScene" uid="uid://kdfasdqo4jxo" path="res://Models/Rock/Rock.tscn" id="13_ers4l"]
 [ext_resource type="Script" uid="uid://c75r5im6v2giq" path="res://Scripts/Others/JumppadScript.gd" id="13_mvfa8"]
-[ext_resource type="Shader" uid="uid://do2kf32usuvk6" path="res://Shaders/Ground.gdshader" id="13_rwt1y"]
+[ext_resource type="Shader" uid="uid://do2kf32usuvk6" path="res://Shaders/ground.gdshader" id="13_rwt1y"]
 [ext_resource type="PackedScene" uid="uid://c3x63pmql6c68" path="res://Models/Chimney/Chimney1.tscn" id="16_o5klw"]
 [ext_resource type="AudioStream" uid="uid://42r0roj1e4eu" path="res://Music/dirty-games-hybridas-main-version-24505-01-17.mp3" id="16_rwt1y"]
 [ext_resource type="VoxelGIData" uid="uid://cq71qus8wlfr" path="res://Scenes/World.VoxelGI2_data.res" id="16_xiqgv"]
 [ext_resource type="AudioStream" uid="uid://cmyge3c53uem1" path="res://Music/eclipse-moire-main-version-01-58-12188.mp3" id="17_mvfa8"]
 [ext_resource type="AudioStream" uid="uid://bfdsaj7fcl1do" path="res://Music/wild-hunt-tatami-main-version-02-08-18293.mp3" id="18_r0dna"]
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Fonts/Ticketing.ttf" id="19_mvfa8"]
-[ext_resource type="PackedScene" uid="uid://cgfqjiqk6v1nr" path="res://Scenes/StartMenuScene.tscn" id="20_r0dna"]
+[ext_resource type="FontFile" uid="uid://c24fp455ya7ve" path="res://Fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="20_r0dna"]
+[ext_resource type="PackedScene" uid="uid://cgfqjiqk6v1nr" path="res://Scenes/StartMenuScene.tscn" id="21_b5aes"]
 [ext_resource type="PackedScene" uid="uid://d3xejhwjbwb5h" path="res://Models/CorridorWall/wall.tscn" id="29_ncx4a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_waglr"]
@@ -131,16 +132,65 @@ stream_2 = ExtResource("18_r0dna")
 [sub_resource type="LabelSettings" id="LabelSettings_r0dna"]
 line_spacing = 5.0
 font = ExtResource("19_mvfa8")
-font_size = 20
+font_size = 32
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_b5aes"]
 line_spacing = 5.0
 font = ExtResource("19_mvfa8")
-font_size = 20
+font_size = 32
 outline_size = 1
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_b5aes"]
+resource_name = "ShowBrief"
+length = 15.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/Brief:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(0.901251, 100),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/Brief:visible_characters")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(14.9984),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_w0bku"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/Brief:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ao37"]
+_data = {
+&"RESET": SubResource("Animation_w0bku"),
+&"ShowBrief": SubResource("Animation_b5aes")
+}
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_yrgup")
@@ -706,21 +756,21 @@ autoplay = true
 bus = &"Music"
 playback_type = 1
 
-[node name="Control" type="Control" parent="."]
+[node name="WorldHUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Control"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="WorldHUD"]
 layout_mode = 0
 offset_right = 463.0
 offset_bottom = 20.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WorldHUD/HBoxContainer3"]
 layout_mode = 2
 
-[node name="Interruptors" type="Label" parent="Control/HBoxContainer3/VBoxContainer"]
+[node name="Interruptors" type="Label" parent="WorldHUD/HBoxContainer3/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -728,10 +778,10 @@ text = "Interruptors to be neutralized: "
 label_settings = SubResource("LabelSettings_r0dna")
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/HBoxContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="WorldHUD/HBoxContainer3"]
 layout_mode = 2
 
-[node name="InterruptorsState" type="Label" parent="Control/HBoxContainer3/VBoxContainer2"]
+[node name="InterruptorsState" type="Label" parent="WorldHUD/HBoxContainer3/VBoxContainer2"]
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -739,7 +789,43 @@ text = "..................."
 label_settings = SubResource("LabelSettings_b5aes")
 vertical_alignment = 1
 
-[node name="StartMenu" parent="." instance=ExtResource("20_r0dna")]
+[node name="MissionBrief" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MissionBrief"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -177.0
+offset_right = 1884.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Brief" type="RichTextLabel" parent="MissionBrief/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("20_r0dna")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "Hi, this is the mission, you must destroy the NegGrav interruptors that the invadors have installed, look for the blue and white indicators. Once all are destroyed, the NegGrav pad will be activated and you can ascend to safety! Good luck"
+fit_content = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MissionBrief"]
+libraries = {
+&"": SubResource("AnimationLibrary_0ao37")
+}
+
+[node name="StartMenu" parent="." instance=ExtResource("21_b5aes")]
 
 [connection signal="area_entered" from="Map/NavigationRegion3D/JumpPad/Area3D" to="Map/NavigationRegion3D/JumpPad" method="_on_area_3d_area_entered"]
 [connection signal="timeout" from="ZombieSpawnTimer" to="." method="_on_zombie_spawn_timer_timeout"]
+[connection signal="animation_finished" from="MissionBrief/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

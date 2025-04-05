@@ -769,20 +769,20 @@ func grappleStateChanges():
 			else: currentState = states.INAIR
 			
 func collisionHandling():
-	return
+	pass
 	#this function handle the collisions, but in this case, only the collision with a wall, to detect if the character can wallrun
-	if is_on_wall():
+	#if is_on_wall():
 		#return
 		
-		var lastCollision = get_slide_collision(0)
+	#	var lastCollision = get_slide_collision(0)
 		
-		if lastCollision:
-			var collidedBody = lastCollision.get_collider()
-			var layer = collidedBody.collision_layer
+	#	if lastCollision:
+	#		var collidedBody = lastCollision.get_collider()
+	#		var layer = collidedBody.collision_layer
 			
 			#here, we check the layer of the collider, then we check if the layer 3 (walkableWall) is enabled, with 1 << 3-1. If theses two points are valid, the character can wallrun
-			if layer & (1 << 3-1) != 0: canWallRun = true 
-			else: canWallRun = false
+	#		if layer & (1 << 3-1) != 0: canWallRun = true 
+	#		else: canWallRun = false
 			
 func _on_object_tool_send_knockback(knockbackAmount : float, knockbackOrientation : Vector3):
 	#this function handle the knockback mechanic
