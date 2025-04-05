@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bwggrf7sbmkcv" path="res://Scenes/PlayerCharacterScene.tscn" id="12_xiqgv"]
 [ext_resource type="PackedScene" uid="uid://kdfasdqo4jxo" path="res://Models/Rock/Rock.tscn" id="13_ers4l"]
 [ext_resource type="Script" uid="uid://c75r5im6v2giq" path="res://Scripts/Others/JumppadScript.gd" id="13_mvfa8"]
-[ext_resource type="Shader" uid="uid://do2kf32usuvk6" path="res://Shaders/Ground.gdshader" id="13_rwt1y"]
+[ext_resource type="Shader" uid="uid://do2kf32usuvk6" path="res://Shaders/ground.gdshader" id="13_rwt1y"]
 [ext_resource type="PackedScene" uid="uid://c3x63pmql6c68" path="res://Models/Chimney/Chimney1.tscn" id="16_o5klw"]
 [ext_resource type="AudioStream" uid="uid://42r0roj1e4eu" path="res://Music/dirty-games-hybridas-main-version-24505-01-17.mp3" id="16_rwt1y"]
 [ext_resource type="VoxelGIData" uid="uid://cq71qus8wlfr" path="res://Scenes/World.VoxelGI2_data.res" id="16_xiqgv"]
