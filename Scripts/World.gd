@@ -4,10 +4,11 @@ extends Node3D
 @onready var spawns = $Map/Spawns
 @onready var interruptSpawns = $Map/InterruptSpawns
 @onready var navigation_region = $Map/NavigationRegion3D
-@onready var interruptorsState = $WorldHUD/HBoxContainer3/VBoxContainer2/InterruptorsState
+@onready var interruptorsState = $WorldHUD/HBoxContainer/VBoxContainer2/iStat
 @onready var startMenu = $StartMenu
 @onready var missionBriefPlayer = $MissionBrief/AnimationPlayer
 @onready var missionBrief = $MissionBrief
+@onready var audioPlayer = $Audio/AudioStreamPlayer
 
 @export var interruptorNumber = 10
 
@@ -19,7 +20,7 @@ var instance
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	startMenu.setPauseMenu(true, true)
 	randomize()
 	for i in interruptorNumber:
@@ -31,8 +32,7 @@ func _ready():
 	
 	interruptorsState.set_text(str(interruptorNumber))
 	currentInterruptorNumber = interruptorNumber
-	missionBriefPlayer.play('ShowBrief')
-	
+	missionBriefPlayer.play('ShowBrief')	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,6 +63,6 @@ func _on_area_3d_area_entered(_area):
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name=='ShowBrief':
 		missionBrief.visible = false
-		
-		
-		
+
+func _on_animation_player_animation_started(anim_name):
+	pass

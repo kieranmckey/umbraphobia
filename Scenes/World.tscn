@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=36 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="Texture2D" uid="uid://difglsmbfmw81" path="res://Textures/terrain.jpg" id="1_v880l"]
 [ext_resource type="Script" uid="uid://dgn4nnte55k83" path="res://Scripts/World.gd" id="1_yrgup"]
@@ -17,7 +17,6 @@
 [ext_resource type="VoxelGIData" uid="uid://cq71qus8wlfr" path="res://Scenes/World.VoxelGI2_data.res" id="16_xiqgv"]
 [ext_resource type="AudioStream" uid="uid://cmyge3c53uem1" path="res://Music/eclipse-moire-main-version-01-58-12188.mp3" id="17_mvfa8"]
 [ext_resource type="AudioStream" uid="uid://bfdsaj7fcl1do" path="res://Music/wild-hunt-tatami-main-version-02-08-18293.mp3" id="18_r0dna"]
-[ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Fonts/Ticketing.ttf" id="19_mvfa8"]
 [ext_resource type="FontFile" uid="uid://c24fp455ya7ve" path="res://Fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="20_r0dna"]
 [ext_resource type="PackedScene" uid="uid://cgfqjiqk6v1nr" path="res://Scenes/StartMenuScene.tscn" id="21_b5aes"]
 [ext_resource type="PackedScene" uid="uid://d3xejhwjbwb5h" path="res://Models/CorridorWall/wall.tscn" id="29_ncx4a"]
@@ -129,19 +128,32 @@ stream_0 = ExtResource("16_rwt1y")
 stream_1 = ExtResource("17_mvfa8")
 stream_2 = ExtResource("18_r0dna")
 
-[sub_resource type="LabelSettings" id="LabelSettings_r0dna"]
-line_spacing = 5.0
-font = ExtResource("19_mvfa8")
-font_size = 32
-outline_size = 1
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_b5aes"]
-line_spacing = 5.0
-font = ExtResource("19_mvfa8")
-font_size = 32
-outline_size = 1
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="Animation" id="Animation_w0bku"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/Brief:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Audio/AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_b5aes"]
 resource_name = "ShowBrief"
@@ -160,7 +172,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("VBoxContainer/Brief:visible_characters")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -170,20 +182,17 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
-
-[sub_resource type="Animation" id="Animation_w0bku"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("VBoxContainer/Brief:visible_characters")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Audio/AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.13333),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ao37"]
@@ -199,6 +208,7 @@ script = ExtResource("1_yrgup")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
 transform = Transform3D(-0.603208, -0.409592, 0.684379, 0, 0.858065, 0.513541, -0.797584, 0.309772, -0.517592, 0, 0, 0)
+visible = false
 light_color = Color(0.700225, 0.746097, 1, 1)
 light_energy = 9.93
 light_indirect_energy = 1.112
@@ -439,7 +449,6 @@ nbJumpsInAirAllowed = 0
 
 [node name="Walls" type="Node3D" parent="Map/NavigationRegion3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.4139, 0)
-visible = false
 
 [node name="Wall" type="StaticBody3D" parent="Map/NavigationRegion3D/Walls"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12, 46.0863)
@@ -752,42 +761,56 @@ autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
 stream = SubResource("AudioStreamPlaylist_b5aes")
-autoplay = true
 bus = &"Music"
 playback_type = 1
 
 [node name="WorldHUD" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 9.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+metadata/_edit_lock_ = true
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="WorldHUD"]
+[node name="HBoxContainer" type="HBoxContainer" parent="WorldHUD"]
 layout_mode = 0
-offset_right = 463.0
-offset_bottom = 20.0
+offset_left = 19.0
+offset_top = 69.0
+offset_right = 794.0
+offset_bottom = 109.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WorldHUD/HBoxContainer3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="WorldHUD/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 
-[node name="Interruptors" type="Label" parent="WorldHUD/HBoxContainer3/VBoxContainer"]
-texture_filter = 1
+[node name="RichTextLabel" type="RichTextLabel" parent="WorldHUD/HBoxContainer/VBoxContainer"]
+clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Interruptors to be neutralized: "
-label_settings = SubResource("LabelSettings_r0dna")
-vertical_alignment = 1
+theme_override_fonts/normal_font = ExtResource("20_r0dna")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Interruptors to be neutralized:"
+fit_content = true
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="WorldHUD/HBoxContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="WorldHUD/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="InterruptorsState" type="Label" parent="WorldHUD/HBoxContainer3/VBoxContainer2"]
-texture_filter = 1
+[node name="iStat" type="RichTextLabel" parent="WorldHUD/HBoxContainer/VBoxContainer2"]
+clip_contents = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "..................."
-label_settings = SubResource("LabelSettings_b5aes")
-vertical_alignment = 1
+theme_override_fonts/normal_font = ExtResource("20_r0dna")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "100"
+fit_content = true
 
 [node name="MissionBrief" type="Control" parent="."]
 layout_mode = 3
@@ -829,3 +852,4 @@ libraries = {
 [connection signal="area_entered" from="Map/NavigationRegion3D/JumpPad/Area3D" to="Map/NavigationRegion3D/JumpPad" method="_on_area_3d_area_entered"]
 [connection signal="timeout" from="ZombieSpawnTimer" to="." method="_on_zombie_spawn_timer_timeout"]
 [connection signal="animation_finished" from="MissionBrief/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="MissionBrief/AnimationPlayer" to="." method="_on_animation_player_animation_started"]

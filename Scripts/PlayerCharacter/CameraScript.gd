@@ -69,6 +69,8 @@ func _ready():
 	
 func _unhandled_input(event):
 	#this function manage camera rotation (360 on x axis, blocked at <= -60 and >= 60 on y axis, to not having the character do a complete head turn, which will be kinda weird)
+	var f = Input.get_mouse_mode()
+	var b = pauseMenu.pauseMenuEnabled
 	if !pauseMenu.pauseMenuEnabled: #can only rotate when the ui is not opened
 		if event is InputEventMouseMotion:
 			rotate_y(-event.relative.x * XAxisSensibility)

@@ -21,8 +21,10 @@ func setPauseMenu(value : bool, enable : bool):
 	if pauseMenuEnabled: Engine.time_scale = 0.0
 	else: Engine.time_scale = 1.0
 	
-	if mouseFree: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	else: Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if mouseFree: 
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else: 
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _on_resume_button_pressed():
 	#close pause menu

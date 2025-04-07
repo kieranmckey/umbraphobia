@@ -12,14 +12,16 @@ func _process(_delta):
 	#this function manage the mouse state
 	#when the mouse is captured, you can't see it, and she's disable (not for the movement detection, but for the on screen inputs)
 	#when the mouse is visible, you can see it, and she's enable
-	if Input.is_action_just_pressed("pauseMenu") and Engine.time_scale > 0.0:
+	if Input.is_action_just_pressed("pauseMenu"):
 		if !optionsMenu.optionsMenuEnabled:
 			if pauseMenuEnabled: setPauseMenu(false, false)
 			else: setPauseMenu(true, true)
 		
 			#handle mouse mode
-			if mouseFree: Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			else: Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			if mouseFree: 
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			else: 
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			
 func setPauseMenu(value : bool, enable : bool):
 	#set the pause penu behaviour (visibility, mouse control, ...)
