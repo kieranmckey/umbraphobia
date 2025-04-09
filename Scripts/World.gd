@@ -61,7 +61,7 @@ func _on_interruptor_dead():
 	currentInterruptorNumber = currentInterruptorNumber - 1
 	interruptorsState.set_text(str(currentInterruptorNumber))
 	if currentInterruptorNumber == 0:
-		animation.stop()
+		#animation.stop()
 		animation.play('ShowMessage')
 		jumpPad.enablePad()
 	if !animation.is_playing():

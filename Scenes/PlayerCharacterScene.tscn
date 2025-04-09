@@ -162,7 +162,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_h128t"]
 font = ExtResource("9_ntc8i")
-font_size = 50
+font_size = 60
 outline_size = 12
 outline_color = Color(0, 0, 0, 0.470588)
 shadow_color = Color(0, 0, 0, 1)

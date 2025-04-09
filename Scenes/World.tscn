@@ -848,7 +848,7 @@ metadata/_edit_lock_ = true
 layout_mode = 0
 offset_left = 19.0
 offset_top = 69.0
-offset_right = 794.0
+offset_right = 998.0
 offset_bottom = 109.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WorldHUD/HBoxContainer"]
@@ -860,7 +860,7 @@ size_flags_vertical = 0
 clip_contents = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("20_r0dna")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "Interruptors to be neutralized:"
 fit_content = true
@@ -873,7 +873,7 @@ size_flags_horizontal = 3
 clip_contents = false
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("20_r0dna")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "100"
 fit_content = true
@@ -929,7 +929,7 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "NegGrav Pad Enabled !"
 fit_content = true
-visible_characters = 1
+visible_characters = 0
 visible_ratio = 0.047619
 
 [node name="StartMenu" parent="." instance=ExtResource("21_b5aes")]

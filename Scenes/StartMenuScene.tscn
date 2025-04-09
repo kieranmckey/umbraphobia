@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://cgfqjiqk6v1nr"]
 
 [ext_resource type="Script" uid="uid://db0bp3agra0qy" path="res://Scripts/StartMenu.gd" id="1_7mj41"]
-[ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Fonts/Ticketing.ttf" id="2_okdm3"]
+[ext_resource type="FontFile" uid="uid://c24fp455ya7ve" path="res://Fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="2_7mj41"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eaa6r"]
 line_spacing = 5.0
-font = ExtResource("2_okdm3")
+font = ExtResource("2_7mj41")
 font_size = 80
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
@@ -46,7 +46,7 @@ theme_override_constants/separation = 40
 [node name="ResumeButton" type="Button" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_okdm3")
+theme_override_fonts/font = ExtResource("2_7mj41")
 theme_override_font_sizes/font_size = 55
 text = "Start"
 
@@ -67,7 +67,7 @@ theme_override_constants/separation = 30
 [node name="QuitButton" type="Button" parent="PanelContainer2/PanelContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_okdm3")
+theme_override_fonts/font = ExtResource("2_7mj41")
 theme_override_font_sizes/font_size = 55
 text = "Quit"
 
