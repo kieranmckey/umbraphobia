@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://t8qlmkc7lw1e"]
+
+[ext_resource type="Script" uid="uid://d2mftvra6ajnk" path="res://Scripts/EndFloor.gd" id="1_geh18"]
+[ext_resource type="AudioStream" uid="uid://bbtic4f13u4ps" path="res://Sounds/075747_inception-horn-victory-82997.mp3" id="2_hp11x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mvfa8"]
+size = Vector3(20, 1, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r0dna"]
+size = Vector3(20, 1, 30)
+
+[sub_resource type="Animation" id="Animation_hxht4"]
+resource_name = "Spin"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ps4ax"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_01a8g"]
+resource_name = "Finale"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_137sj"]
+_data = {
+&"Finale": SubResource("Animation_01a8g"),
+&"RESET": SubResource("Animation_ps4ax"),
+&"Spin": SubResource("Animation_hxht4")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fcuwj"]
+size = Vector3(8.39471, 3.6499, 9.52417)
+
+[node name="EndFloor" type="StaticBody3D"]
+script = ExtResource("1_geh18")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_mvfa8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_r0dna")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.35077, 0)
+modulate = Color(0.46803, 0.719497, 0.32565, 1)
+text = "THE END"
+font_size = 200
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_137sj")
+}
+autoplay = "Spin"
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.237274, 2.1254, -0.300659)
+shape = SubResource("BoxShape3D_fcuwj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.99323, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_hp11x")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

@@ -39,7 +39,7 @@ func _on_resume_button_pressed():
 	#there is a bug here, i don't know why, but the mouse keep being free when the pause menu is closed via the resume button
 	#you can set the mouse to not free again by closing the menu directly with the key input
 	#if you know how to resolve that issue, don't hesitate to make a post about it on the discussions tab of the project's Github repository
-	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	setPauseMenu(false, false)
 	
 func _on_options_button_pressed():

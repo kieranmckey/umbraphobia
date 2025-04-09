@@ -27,6 +27,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if player.currentState == player.states.DEAD:
+		return
+	
 	velocity = Vector3.ZERO
 	
 	match state_machine.get_current_node():
@@ -55,7 +58,6 @@ func _process(delta):
 	# Conditions
 	anim_tree.set("parameters/conditions/shoot", _target_in_range())
 	anim_tree.set("parameters/conditions/walk", !_target_in_range())
-	
 	move_and_slide()
 
 
@@ -79,10 +81,11 @@ func _fireTODO():
 	#bullet.global_transform.origin = raycast.global_transform.origin
 
 func _fire():	
-	instance = bullet.instantiate()
-	get_parent().add_child(instance)
-	instance.position = raycast.global_position # todo add correct gun pos
-	instance.transform.basis = raycast.global_transform.basis
+	if player.currentState != player.states.DEAD:
+		instance = bullet.instantiate()
+		get_parent().add_child(instance)
+		instance.position = raycast.global_position # todo add correct gun pos
+		instance.transform.basis = raycast.global_transform.basis
 	#get_parent().add_child(instance)
 
 func _on_area_3d_body_part_hit(dam): #TODO remove
@@ -93,7 +96,7 @@ func _on_area_3d_body_part_hit(dam): #TODO remove
 		
 func damage(amount, _dir):
 	#Audio.play("Sounds/enemy_hurt.ogg")
-	Audio.play("Sounds/Impacts/electric-impact-37128.mp3")
+	#Audio.play("Sounds/Impacts/electric-impact-37128.mp3")
 
 	health -= amount
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://kw1crnntcbs5"]
+[gd_scene load_steps=19 format=4 uid="uid://kw1crnntcbs5"]
 
 [ext_resource type="Script" uid="uid://yxxf2l2wtqjj" path="res://Scripts/JumppadScript.gd" id="2_5fcsa"]
 [ext_resource type="Texture2D" uid="uid://cjomejdldtag4" path="res://Models/JumpPad/textures/M_JumpPad_emissive.png" id="3_rywrv"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://qniw1251a6uj" path="res://Models/JumpPad/textures/M_JumpPadBeam_baseColor.png" id="6_3a4vf"]
 [ext_resource type="Texture2D" uid="uid://y1dl86hohdgj" path="res://Models/JumpPad/textures/M_JumpPad_baseColor.png" id="6_wpm16"]
 [ext_resource type="Texture2D" uid="uid://ov1x6yqj1kn1" path="res://Models/JumpPad/textures/M_JumpPadBeam_emissive.png" id="7_bv6fp"]
+[ext_resource type="AudioStream" uid="uid://7radv2whvkx0" path="res://Sounds/Wins/energy-2-90733.mp3" id="8_rywrv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a5krw"]
 resource_name = "M_JumpPad"
@@ -102,6 +103,31 @@ shadow_mesh = SubResource("ArrayMesh_wjsy6")
 [sub_resource type="BoxShape3D" id="BoxShape3D_3a4vf"]
 size = Vector3(1, 1, 0.0384639)
 
+[sub_resource type="Animation" id="Animation_5yigb"]
+resource_name = "activated"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("8_rywrv")
+}],
+"times": PackedFloat32Array(0.6)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qsnx7"]
+_data = {
+&"activated": SubResource("Animation_5yigb")
+}
+
 [node name="JumpPad" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 script = ExtResource("2_5fcsa")
@@ -133,5 +159,12 @@ collision_mask = 3
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jumppad_model/pad"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.83773e-08, 0.397203)
 shape = SubResource("BoxShape3D_3a4vf")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qsnx7")
+}
 
 [connection signal="area_entered" from="jumppad_model/pad" to="." method="_on_area_3d_2_area_entered"]

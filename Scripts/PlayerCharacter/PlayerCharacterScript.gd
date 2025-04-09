@@ -126,6 +126,7 @@ var timeBeforeCanGrappleAgainRef : float
 @onready var mesh = $MeshInstance3D
 @onready var hud = $HUD
 @onready var pauseMenu = $PauseMenu
+@onready var anim = $AnimationPlayer
 
 
 var bullet = load("res://Scenes/Bullet.tscn")
@@ -796,4 +797,7 @@ func damage(amount, dir):
 	
 	if health < 0: #TODO
 		currentState = states.DEAD
+		anim.play("die")
+		if get_tree():	
+			await get_tree().create_timer(5).timeout
 		get_tree().reload_current_scene() # Reset when out of health

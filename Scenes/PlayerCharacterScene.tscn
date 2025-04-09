@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bwggrf7sbmkcv"]
+[gd_scene load_steps=35 format=3 uid="uid://bwggrf7sbmkcv"]
 
 [ext_resource type="Script" uid="uid://utnns802s0y8" path="res://Scripts/PlayerCharacter/PlayerCharacterScript.gd" id="1_5dbx1"]
 [ext_resource type="Script" uid="uid://2anm76u3kya5" path="res://Scripts/PlayerCharacter/CameraScript.gd" id="2_x12n0"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://bwr73i28ligrq" path="res://Fonts/Ticketing.ttf" id="5_kleop"]
 [ext_resource type="PackedScene" uid="uid://dh3ln04ijax8n" path="res://Scenes/PauseMenuScene.tscn" id="6_3wmtt"]
 [ext_resource type="FontFile" uid="uid://biqtga8moh7ah" path="res://Fonts/lilita_one_regular.ttf" id="9_ntc8i"]
+[ext_resource type="AudioStream" uid="uid://cjpjjbvyakfqt" path="res://Sounds/deaths/dramatic-synth-echo-43970.mp3" id="11_h128t"]
 [ext_resource type="Shader" uid="uid://cveksnmpffthn" path="res://Shaders/SpeedLinesShader.gdshader" id="12_8u6b8"]
 
 [sub_resource type="Curve" id="Curve_qvv7t"]
@@ -165,6 +166,30 @@ font_size = 50
 outline_size = 12
 outline_color = Color(0, 0, 0, 0.470588)
 shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_takn3"]
+resource_name = "die"
+length = 5.0
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("11_h128t")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_62ccf"]
+_data = {
+&"die": SubResource("Animation_takn3")
+}
 
 [node name="PlayerCharacter" type="CharacterBody3D" groups=["PlayerCharacter"]]
 collision_layer = 3
@@ -582,5 +607,12 @@ vertical_alignment = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("6_3wmtt")]
 visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_62ccf")
+}
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 
 [connection signal="sendKnockback" from="CameraHolder/Camera3D/ObjectTool" to="." method="_on_object_tool_send_knockback"]
