@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=38 format=3 uid="uid://db2h3t17k37pe"]
 
 [ext_resource type="Texture2D" uid="uid://difglsmbfmw81" path="res://Textures/terrain.jpg" id="1_v880l"]
 [ext_resource type="Script" uid="uid://dgn4nnte55k83" path="res://Scripts/World.gd" id="1_yrgup"]
@@ -20,6 +20,8 @@
 [ext_resource type="AudioStream" uid="uid://bfdsaj7fcl1do" path="res://Music/wild-hunt-tatami-main-version-02-08-18293.mp3" id="18_r0dna"]
 [ext_resource type="FontFile" uid="uid://c24fp455ya7ve" path="res://Fonts/xolonium/xolonium-fonts-4.1/ttf/Xolonium-Regular.ttf" id="20_r0dna"]
 [ext_resource type="PackedScene" uid="uid://cgfqjiqk6v1nr" path="res://Scenes/StartMenuScene.tscn" id="21_b5aes"]
+[ext_resource type="AudioStream" uid="uid://c1gr3ddsqhy6b" path="res://Sounds/Wins/new-notification-7-210334.mp3" id="22_w0bku"]
+[ext_resource type="AudioStream" uid="uid://7radv2whvkx0" path="res://Sounds/Wins/energy-2-90733.mp3" id="23_0ao37"]
 [ext_resource type="PackedScene" uid="uid://d3xejhwjbwb5h" path="res://Models/CorridorWall/wall.tscn" id="29_ncx4a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_waglr"]
@@ -119,6 +121,36 @@ stream_0 = ExtResource("16_rwt1y")
 stream_1 = ExtResource("17_mvfa8")
 stream_2 = ExtResource("18_r0dna")
 
+[sub_resource type="Animation" id="Animation_r0dna"]
+resource_name = "InterruptorDead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WorldHUD/HBoxContainer/VBoxContainer2/iStat:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.126253, 0.953873, 0.80356, 1), Color(1, 0.98658, 0.998798, 1)]
+}
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Audio/FX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("22_w0bku")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
+
 [sub_resource type="Animation" id="Animation_w0bku"]
 length = 0.001
 tracks/0/type = "value"
@@ -136,7 +168,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Audio/AudioStreamPlayer:playing")
+tracks/1/path = NodePath("Audio/Music:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -156,6 +188,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MissionBrief/VBoxContainer2/Message1:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.047619]
 }
 
 [sub_resource type="Animation" id="Animation_b5aes"]
@@ -188,7 +232,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Audio/AudioStreamPlayer:playing")
+tracks/2/path = NodePath("Audio/Music:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -198,26 +242,43 @@ tracks/2/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_r0dna"]
-resource_name = "InterruptorDead"
-tracks/0/type = "value"
+[sub_resource type="Animation" id="Animation_0ao37"]
+resource_name = "ShowMessage"
+length = 3.0
+tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("WorldHUD/HBoxContainer/VBoxContainer2/iStat:modulate")
+tracks/0/path = NodePath("Audio/FX")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.966667),
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("23_0ao37")
+}],
+"times": PackedFloat32Array(0.2)
+}
+tracks/0/use_blend = true
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MissionBrief/VBoxContainer2/Message1:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0.126253, 0.953873, 0.80356, 1), Color(1, 0.98658, 0.998798, 1)]
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ao37"]
 _data = {
 &"InterruptorDead": SubResource("Animation_r0dna"),
 &"RESET": SubResource("Animation_w0bku"),
-&"ShowBrief": SubResource("Animation_b5aes")
+&"ShowBrief": SubResource("Animation_b5aes"),
+&"ShowMessage": SubResource("Animation_0ao37")
 }
 
 [node name="World" type="Node3D"]
@@ -762,10 +823,12 @@ autostart = true
 
 [node name="Audio" type="Node3D" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Audio"]
+[node name="Music" type="AudioStreamPlayer" parent="Audio"]
 stream = SubResource("AudioStreamPlaylist_b5aes")
 bus = &"Music"
 playback_type = 1
+
+[node name="FX" type="AudioStreamPlayer" parent="Audio"]
 
 [node name="WorldHUD" type="Control" parent="."]
 layout_mode = 3
@@ -841,10 +904,33 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("20_r0dna")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
-text = "We have been overrun! Destroy the NegGrav interruptors that the invadors have installed, look for the blue and white indicators. Once all are destroyed, the yellow NegGrav pad will be activated and you can ascend to safety! Good luck!"
+text = "We have been overrun! Destroy the NegGrav interruptors that the invadors have installed, look for the blue orbs. Once all are destroyed, the yellow NegGrav Pad will be activated and you can ascend to safety! Good luck!"
 fit_content = true
 visible_characters = 0
 visible_ratio = 0.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MissionBrief"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 720.0
+offset_top = -270.0
+offset_right = 2604.0
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Message1" type="RichTextLabel" parent="MissionBrief/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("20_r0dna")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "NegGrav Pad Enabled !"
+fit_content = true
+visible_characters = 1
+visible_ratio = 0.047619
 
 [node name="StartMenu" parent="." instance=ExtResource("21_b5aes")]
 

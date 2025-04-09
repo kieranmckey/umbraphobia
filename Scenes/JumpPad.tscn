@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://kw1crnntcbs5"]
+[gd_scene load_steps=23 format=4 uid="uid://kw1crnntcbs5"]
 
 [ext_resource type="Script" uid="uid://yxxf2l2wtqjj" path="res://Scripts/JumppadScript.gd" id="2_5fcsa"]
 [ext_resource type="Texture2D" uid="uid://cjomejdldtag4" path="res://Models/JumpPad/textures/M_JumpPad_emissive.png" id="3_rywrv"]
@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://qniw1251a6uj" path="res://Models/JumpPad/textures/M_JumpPadBeam_baseColor.png" id="6_3a4vf"]
 [ext_resource type="Texture2D" uid="uid://y1dl86hohdgj" path="res://Models/JumpPad/textures/M_JumpPad_baseColor.png" id="6_wpm16"]
 [ext_resource type="Texture2D" uid="uid://ov1x6yqj1kn1" path="res://Models/JumpPad/textures/M_JumpPadBeam_emissive.png" id="7_bv6fp"]
+[ext_resource type="Shader" uid="uid://bul03hcnetfkr" path="res://Shaders/Warp.gdshader" id="8_qsnx7"]
 [ext_resource type="AudioStream" uid="uid://7radv2whvkx0" path="res://Sounds/Wins/energy-2-90733.mp3" id="8_rywrv"]
+[ext_resource type="AudioStream" uid="uid://c1gr3ddsqhy6b" path="res://Sounds/Wins/new-notification-7-210334.mp3" id="10_wpm16"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a5krw"]
 resource_name = "M_JumpPad"
@@ -97,8 +99,14 @@ _surfaces = [{
 "vertex_count": 18,
 "vertex_data": PackedByteArray("mx8AAP//cj5j4AAAAAByPpsfAAAAAHI+Y+AAAP//cj4AAJsf//82MwAAmx8AADYzAABj4AAA5SAAAGPg///lIJsf//8AAEYLmx//////Rgtj4P//AABGC2Pg/////0YL//9j4AAA5SD//2Pg///lIP//mx8AADYz//+bH///NjNj4AAA//9yPmPgAAAAAHI+bSQ2kjYSkVttJDaSNhKRWzZJmqQ2SZqk8V/4r/Ff+K9rdDW6a3Q1ujU6lAs1OpQL+C8NIPgvDSCbJMk2myTJNjYSkVs2EpFb")
 }]
-blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_wjsy6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rywrv"]
+render_priority = 0
+shader = ExtResource("8_qsnx7")
+shader_parameter/strength = 0.194
+shader_parameter/speed = 0.23
+shader_parameter/screen_resolution = Vector2(1280, 720)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3a4vf"]
 size = Vector3(1, 1, 0.0384639)
@@ -119,13 +127,36 @@ tracks/0/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("8_rywrv")
 }],
-"times": PackedFloat32Array(0.6)
+"times": PackedFloat32Array(0.633333)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="Animation" id="Animation_bv6fp"]
+resource_name = "powerup"
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.944861,
+"start_offset": 0.0,
+"stream": ExtResource("10_wpm16")
+}, {
+"end_offset": 0.944861,
+"start_offset": 0.0,
+"stream": ExtResource("10_wpm16")
+}],
+"times": PackedFloat32Array(0, 0.466667)
 }
 tracks/0/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qsnx7"]
 _data = {
-&"activated": SubResource("Animation_5yigb")
+&"activated": SubResource("Animation_5yigb"),
+&"powerup": SubResource("Animation_bv6fp")
 }
 
 [node name="JumpPad" type="Node3D"]
@@ -145,11 +176,13 @@ shape = SubResource("ConcavePolygonShape3D_yjdkm")
 
 [node name="JumpPadBeam" type="Node3D" parent="jumppad_model"]
 transform = Transform3D(0.5, 0, 0, 0, -8.14603e-08, 0.5, 0, -0.5, -8.14603e-08, 0, 0, 0)
+visible = false
 
 [node name="JumpPadBeam_M_JumpPadBeam_0" type="MeshInstance3D" parent="jumppad_model/JumpPadBeam"]
-transform = Transform3D(1, 0, 0, 0, -0.038039, -0.999276, 0, 0.999276, -0.038039, 0, -0.557297, -0.0124029)
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0.771656, 1.59449e-07)
 mesh = SubResource("ArrayMesh_xkesm")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_rywrv")
 
 [node name="pad" type="Area3D" parent="jumppad_model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.63918e-10, 0.0129008)
