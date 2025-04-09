@@ -1,0 +1,43 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://bk7jo6xbuntlf"
+path="res://.godot/imported/scene.gltf-7477c8009d3a1614de1e47b9184cfe2d.scn"
+
+[deps]
+
+source_file="res://Models/JumpPad/scene.gltf"
+dest_files=["res://.godot/imported/scene.gltf-7477c8009d3a1614de1e47b9184cfe2d.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:Sketchfab_model/4378e0e7720b40d4af88fc2d100bba2a_fbx/RootNode/JumpPad/JumpPad_M_JumpPad_0": {
+"generate/physics": true
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1
