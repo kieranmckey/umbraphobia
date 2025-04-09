@@ -9,6 +9,8 @@ extends Node3D
 @onready var missionBriefPlayer = $AnimationPlayer
 @onready var missionBrief = $MissionBrief
 @onready var audioPlayer = $Audio/AudioStreamPlayer
+@onready var jumpPad = $Map/NavigationRegion3D/JumpPad
+
 
 @export var interruptorNumber = 10
 
@@ -57,6 +59,8 @@ func _on_zombie_spawn_timer_timeout():
 func _on_interruptor_dead():
 	currentInterruptorNumber = currentInterruptorNumber - 1
 	interruptorsState.set_text(str(currentInterruptorNumber))
+	if currentInterruptorNumber == 0:
+		jumpPad.enablePad()
 		
 
 
