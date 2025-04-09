@@ -7,12 +7,14 @@ class_name JumpPad
 @export var jumpBoostValue : float
 
 @onready var jumppad = $jumppad_model/pad
+@onready var anim = $AnimationPlayer
 
-func ready():
+func _ready():
 	jumppad.monitoring = false
 
 func enablePad():
 	jumppad.monitoring = true
+	anim.play('activated')
 
 func _on_area_3d_2_area_entered(area):
 	if area.get_parent() is PlayerCharacter: area.get_parent().jump(jumpBoostValue, true) # Replace with function body.

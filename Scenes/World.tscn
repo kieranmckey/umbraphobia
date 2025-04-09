@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://kdfasdqo4jxo" path="res://Models/Rock/Rock.tscn" id="13_ers4l"]
 [ext_resource type="Shader" uid="uid://do2kf32usuvk6" path="res://Shaders/ground.gdshader" id="13_rwt1y"]
 [ext_resource type="PackedScene" uid="uid://kw1crnntcbs5" path="res://Scenes/JumpPad.tscn" id="14_r0dna"]
+[ext_resource type="PackedScene" uid="uid://t8qlmkc7lw1e" path="res://Scenes/EndFloor.tscn" id="16_b5aes"]
 [ext_resource type="PackedScene" uid="uid://c3x63pmql6c68" path="res://Models/Chimney/Chimney1.tscn" id="16_o5klw"]
 [ext_resource type="AudioStream" uid="uid://42r0roj1e4eu" path="res://Music/dirty-games-hybridas-main-version-24505-01-17.mp3" id="16_rwt1y"]
 [ext_resource type="VoxelGIData" uid="uid://cq71qus8wlfr" path="res://Scenes/World.VoxelGI2_data.res" id="16_xiqgv"]
@@ -111,12 +112,6 @@ emission_enabled = true
 emission = Color(1, 0, 0.211765, 1)
 emission_energy_multiplier = 9.09
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mvfa8"]
-size = Vector3(20, 1, 30)
-
-[sub_resource type="BoxMesh" id="BoxMesh_r0dna"]
-size = Vector3(20, 1, 30)
-
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_b5aes"]
 shuffle = true
 stream_count = 3
@@ -150,6 +145,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WorldHUD/HBoxContainer/VBoxContainer2/iStat:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_b5aes"]
 resource_name = "ShowBrief"
@@ -173,7 +180,7 @@ tracks/1/path = NodePath("MissionBrief/VBoxContainer/Brief:visible_ratio")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(14.9),
+"times": PackedFloat32Array(14.7667),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
@@ -191,8 +198,24 @@ tracks/2/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_r0dna"]
+resource_name = "InterruptorDead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WorldHUD/HBoxContainer/VBoxContainer2/iStat:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.126253, 0.953873, 0.80356, 1), Color(1, 0.98658, 0.998798, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ao37"]
 _data = {
+&"InterruptorDead": SubResource("Animation_r0dna"),
 &"RESET": SubResource("Animation_w0bku"),
 &"ShowBrief": SubResource("Animation_b5aes")
 }
@@ -205,6 +228,7 @@ interruptorNumber = 3
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Map"]
 transform = Transform3D(-0.603208, -0.409592, 0.684379, 0, 0.858065, 0.513541, -0.797584, 0.309772, -0.517592, 0, 0, 0)
+visible = false
 light_color = Color(0.700225, 0.746097, 1, 1)
 light_energy = 9.93
 light_indirect_energy = 1.112
@@ -729,14 +753,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03292, 0, -13.2874)
 [node name="SpawnPoint40" type="Node3D" parent="Map/InterruptSpawns"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.03292, 0, -13.2874)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 15, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/StaticBody3D"]
-shape = SubResource("BoxShape3D_mvfa8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/StaticBody3D"]
-mesh = SubResource("BoxMesh_r0dna")
+[node name="Floor2" parent="Map" instance=ExtResource("16_b5aes")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 15, 9.35294)
 
 [node name="ZombieSpawnTimer" type="Timer" parent="."]
 wait_time = 4.0
@@ -812,8 +830,9 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -177.0
+offset_top = -233.0
 offset_right = 1884.0
+offset_bottom = -56.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -822,7 +841,7 @@ layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("20_r0dna")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
-text = "Hi, this is the mission, you must destroy the NegGrav interruptors that the invadors have installed, look for the blue and white indicators. Once all are destroyed, the NegGrav pad will be activated and you can ascend to safety! Good luck"
+text = "We have been overrun! Destroy the NegGrav interruptors that the invadors have installed, look for the blue and white indicators. Once all are destroyed, the yellow NegGrav pad will be activated and you can ascend to safety! Good luck!"
 fit_content = true
 visible_characters = 0
 visible_ratio = 0.0
