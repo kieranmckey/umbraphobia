@@ -99,9 +99,9 @@ shader_parameter/gutter_color = Color(0.922, 0.376, 0, 1)
 shader_parameter/cell_roundedness = 0.0
 shader_parameter/cell_manipulator_radius = 0.0
 shader_parameter/cell_manipulator_uv_pos = Vector2(0.5, 0.5)
-shader_parameter/manipulated_cell_size = 0.5
+shader_parameter/manipulated_cell_size = 1.0
 shader_parameter/manipulator_gutter_color = Color(1, 1, 1, 1)
-shader_parameter/cell_manipulation_anim_speed = 1.0
+shader_parameter/cell_manipulation_anim_speed = 0.1
 shader_parameter/gutter_noise_color = Color(1, 1, 1, 1)
 shader_parameter/gutter_noise_speed = 0.1
 shader_parameter/fresnel_color = Color(0.675, 0.192, 0, 1)
@@ -283,7 +283,6 @@ _data = {
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_yrgup")
-interruptorNumber = 3
 
 [node name="Map" type="Node3D" parent="."]
 
